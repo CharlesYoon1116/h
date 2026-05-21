@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 웹젠 모의고사 — 사업PM 부문 신규 출제</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+      --section-1: #2563eb; --section-2: #7c3aed; --section-3: #d97706;
+    }
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.06);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+      --section-1: #3b82f6; --section-2: #8b5cf6; --section-3: #f59e0b;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em;
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4,h5,h6 { color: var(--text); letter-spacing: -0.03em; line-height: 1.15; text-wrap: balance; }
+    h1 { font-weight: 800; } h2 { font-weight: 700; } h3 { font-weight: 700; }
+    p,li,td,th,span,label { color: var(--text); font-weight: 400; }
+    .text-secondary { color: var(--text-secondary); }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 22px;
+    }
+    .card:hover { box-shadow: 0 0 0 1px var(--border), 0 8px 16px rgba(0,0,0,0.06); }
+
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .edit-toolbar, .deck-nav, .deck-dots, .deck-hint { display: none !important; }
+      .slide { position: static !important; visibility: visible !important; opacity: 1 !important;
+              page-break-after: always; min-height: auto; }
+      .card { break-inside:avoid; border:1px solid #ddd; box-shadow:none; }
+      * { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+    }
+
+    .viz-menu { position:fixed; top:16px; right:16px; z-index:9999; }
+    .viz-menu-toggle {
+      width:44px; height:44px; border-radius:12px;
+      background:var(--surface); border:1px solid var(--border);
+      color:var(--text); cursor:pointer; display:flex;
+      align-items:center; justify-content:center;
+      backdrop-filter:blur(12px); transition:all 0.2s;
+    }
+    .viz-menu-toggle:hover { background:var(--surface-hover); }
+    .viz-menu-dropdown {
+      position:absolute; top:52px; right:0; min-width:200px;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:8px;
+      opacity:0; visibility:hidden; transform:translateY(-8px);
+      transition:all 0.2s; backdrop-filter:blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity:1; visibility:visible; transform:translateY(0); }
+    .viz-menu-dropdown button {
+      width:100%; padding:10px 14px; border:none; border-radius:8px;
+      background:transparent; color:var(--text); font-size:14px;
+      font-family:inherit; cursor:pointer; text-align:left;
+      display:flex; align-items:center; gap:10px; transition:background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background:var(--surface-hover); }
+    .skip-link { position:absolute; left:-9999px; }
+    .skip-link:focus { position:fixed; left:16px; top:16px; z-index:10000;
+      padding:8px 16px; background:var(--accent); color:white;
+      text-decoration:none; border-radius:4px; }
+
+    body.edit-mode [contenteditable="true"] {
+      outline: 2px solid var(--accent); outline-offset: 2px;
+      border-radius: 4px; cursor: text; min-height: 1em;
+    }
+    body.edit-mode [contenteditable="true"]:focus {
+      outline: 2px solid var(--accent);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+      background: rgba(37,99,235,0.05);
+    }
+    body.edit-mode [contenteditable="true"]:hover:not(:focus) {
+      outline: 2px dashed var(--accent);
+    }
+    .edit-toolbar {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(16px);
+      display: flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1px solid rgba(37,99,235,0.4);
+      border-radius: 40px; padding: 8px 16px; z-index: 99999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.24);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    body.edit-mode .edit-toolbar {
+      opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0);
+    }
+    .edit-toolbar .edit-badge {
+      font-size: 11px; color: var(--accent); font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding-right: 8px; border-right: 1px solid var(--border);
+    }
+    .edit-toolbar button {
+      padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border);
+      background: var(--surface-hover); color: var(--text); font-size: 12px;
+      font-family: inherit; cursor: pointer; transition: all 0.15s;
+    }
+    .edit-toolbar button:hover { background: var(--surface); }
+    .edit-toolbar .btn-save { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+
+    /* ===== 슬라이드 덱 ===== */
+    .slide{
+      min-height:100vh; padding:48px 64px;
+      display:flex; flex-direction:column; justify-content:center;
+      position:absolute; top:0; left:0; right:0;
+      visibility:hidden; opacity:0; pointer-events:none;
+      transition:opacity .3s ease-out;
+    }
+    .slide.active{
+      position:relative; visibility:visible; opacity:1; pointer-events:auto;
+      animation:slideIn .35s ease-out;
+    }
+    .slide-inner{ max-width:1320px; width:100%; margin:0 auto; }
+
+    .eyebrow{
+      display:inline-block; font-size:12px; letter-spacing:0.18em;
+      text-transform:uppercase; font-weight:700;
+      padding:6px 12px; border-radius:99px;
+    }
+    .eyebrow.s1{ color:var(--section-1); border:1px solid var(--section-1); }
+    .eyebrow.s2{ color:var(--section-2); border:1px solid var(--section-2); }
+    .eyebrow.s3{ color:var(--section-3); border:1px solid var(--section-3); }
+
+    .slide-title{ font-size:clamp(1.6rem, 3.2vw, 2.6rem); margin-top:18px; }
+    .slide-sub{ font-size:1.05rem; color:var(--text-secondary); margin-top:14px; max-width:920px; }
+
+    /* 네비 */
+    .deck-nav{
+      position:fixed; bottom:24px; right:32px; z-index:100;
+      display:flex; gap:10px; align-items:center;
+      background:rgba(0,0,0,.85); backdrop-filter:blur(10px);
+      padding:10px 14px; border-radius:99px;
+      border:1px solid rgba(255,255,255,.1); font-size:13px;
+    }
+    .deck-nav button{
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+      color:#fff; width:36px; height:36px; border-radius:99px;
+      cursor:pointer; font-size:16px; font-family:inherit;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .15s;
+    }
+    .deck-nav button:hover:not(:disabled){background:var(--accent);border-color:var(--accent)}
+    .deck-nav button:disabled{opacity:.3;cursor:not-allowed}
+    .deck-counter{color:#fff; font-weight:600; min-width:60px; text-align:center; font-variant-numeric:tabular-nums}
+    .deck-counter .total{opacity:.5}
+    .deck-dots{
+      position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+      display:flex; gap:6px; z-index:99; flex-wrap:wrap; max-width:80vw; justify-content:center;
+    }
+    .deck-dots .dot{
+      width:7px; height:7px; border-radius:99px;
+      background:rgba(100,116,139,.25); cursor:pointer;
+      border:none; padding:0; transition:all .2s;
+    }
+    .deck-dots .dot.active{background:var(--accent); width:22px}
+    .deck-dots .dot:hover:not(.active){background:rgba(100,116,139,.5)}
+    .deck-hint{
+      position:fixed; bottom:24px; left:32px; z-index:99;
+      color:var(--text-secondary); font-size:11px; opacity:.6;
+    }
+    .deck-hint kbd{
+      background:var(--surface-hover); border:1px solid var(--border);
+      border-radius:4px; padding:2px 6px; margin:0 2px;
+      font-family:monospace; font-size:10px;
+    }
+    @media(max-width:900px){
+      .deck-nav{bottom:12px; right:12px; padding:6px 10px}
+      .deck-nav button{width:32px; height:32px}
+      .deck-dots{bottom:60px}
+      .deck-hint{display:none}
+      .slide{padding:32px 20px}
+    }
+
+    /* ===== 타이틀 / 섹션 디바이더 ===== */
+    .title-slide{
+      background:linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(124,58,237,0.05) 100%);
+    }
+    .title-tag{
+      font-size:13px; letter-spacing:0.22em; text-transform:uppercase;
+      color:var(--accent); font-weight:700; margin-bottom:24px;
+    }
+    .title-main{ font-size:clamp(2.2rem, 5vw, 4rem); line-height:1.05; }
+    .title-meta{
+      display:flex; gap:32px; margin-top:40px; flex-wrap:wrap;
+      font-size:0.95rem; color:var(--text-secondary);
+    }
+    .title-meta strong{ color:var(--text); font-weight:600; }
+
+    .section-divider{ text-align:left; }
+    .section-divider .section-no{
+      font-size:9rem; font-weight:900; line-height:1;
+      color:var(--accent); opacity:0.15; letter-spacing:-0.05em;
+    }
+    .section-divider.s1 .section-no{ color:var(--section-1); }
+    .section-divider.s2 .section-no{ color:var(--section-2); }
+    .section-divider.s3 .section-no{ color:var(--section-3); }
+    .section-divider .section-tag{
+      display:inline-block; font-size:13px; letter-spacing:0.2em; text-transform:uppercase;
+      font-weight:700; padding:6px 14px; border-radius:99px; margin-top:-40px;
+    }
+    .section-divider.s1 .section-tag{ color:var(--section-1); border:1px solid var(--section-1); }
+    .section-divider.s2 .section-tag{ color:var(--section-2); border:1px solid var(--section-2); }
+    .section-divider.s3 .section-tag{ color:var(--section-3); border:1px solid var(--section-3); }
+    .section-divider .section-title{ font-size:clamp(2.4rem, 5vw, 3.8rem); margin-top:16px; }
+    .section-divider .section-sub{ font-size:1.15rem; color:var(--text-secondary); margin-top:18px; max-width:780px; }
+    .section-divider .section-list{ margin-top:32px; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; max-width:920px; }
+    .section-divider .section-list .item{
+      background:var(--surface); border:1px solid var(--border); border-radius:8px;
+      padding:14px 16px;
+    }
+    .section-divider .section-list .item .no{ font-size:0.7rem; color:var(--accent); font-weight:700; letter-spacing:0.1em; }
+    .section-divider.s2 .section-list .item .no{ color:var(--section-2); }
+    .section-divider.s3 .section-list .item .no{ color:var(--section-3); }
+    .section-divider .section-list .item .ttl{ font-size:0.95rem; font-weight:600; margin-top:4px; line-height:1.4; }
+
+    /* ===== Overview KPI ===== */
+    .kpi-grid{
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:16px; margin-top:28px;
+    }
+    .kpi-card{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:24px;
+    }
+    .kpi-card.s1{ border-left:4px solid var(--section-1); }
+    .kpi-card.s2{ border-left:4px solid var(--section-2); }
+    .kpi-card.s3{ border-left:4px solid var(--section-3); }
+    .kpi-card .label{ font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-secondary); }
+    .kpi-card .value{ font-size:2.8rem; font-weight:800; color:var(--text); margin-top:8px; line-height:1; letter-spacing:-0.04em; }
+    .kpi-card.s1 .value{ color:var(--section-1); }
+    .kpi-card.s2 .value{ color:var(--section-2); }
+    .kpi-card.s3 .value{ color:var(--section-3); }
+    .kpi-card .desc{ font-size:0.9rem; color:var(--text-secondary); margin-top:10px; }
+
+    /* ===== 문제 레이아웃 ===== */
+    .q-layout{
+      display:grid; grid-template-columns:5fr 7fr; gap:24px; margin-top:20px;
+      align-items:stretch;
+    }
+    @media(max-width:1000px){ .q-layout{ grid-template-columns:1fr; } }
+    .q-prompt{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:24px;
+      border-left:4px solid var(--accent);
+      display:flex; flex-direction:column;
+    }
+    .q-prompt.s1{ border-left-color:var(--section-1); }
+    .q-prompt.s2{ border-left-color:var(--section-2); }
+    .q-prompt.s3{ border-left-color:var(--section-3); }
+    .q-no{ font-size:0.72rem; letter-spacing:0.16em; color:var(--accent); font-weight:700; }
+    .q-prompt.s1 .q-no{ color:var(--section-1); }
+    .q-prompt.s2 .q-no{ color:var(--section-2); }
+    .q-prompt.s3 .q-no{ color:var(--section-3); }
+    .q-title-text{ font-size:1.2rem; font-weight:700; margin-top:6px; line-height:1.35; }
+    .q-body{ font-size:0.95rem; color:var(--text); margin-top:14px; line-height:1.65; }
+    .q-body table{ width:100%; border-collapse:collapse; margin-top:10px; font-size:0.84rem; }
+    .q-body th, .q-body td{ padding:6px 8px; border:1px solid var(--border); text-align:center; }
+    .q-body th{ background:var(--surface-hover); font-weight:600; }
+    .q-body ul{ list-style:none; margin-top:8px; }
+    .q-body ul li{ padding-left:14px; position:relative; margin-top:4px; }
+    .q-body ul li::before{ content:'·'; position:absolute; left:2px; color:var(--accent); font-weight:700; }
+    .q-sub{ font-size:0.85rem; color:var(--text-secondary); margin-top:14px; padding-top:14px; border-top:1px dashed var(--border); }
+
+    .q-solve{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:24px;
+      display:flex; flex-direction:column;
+    }
+    .solve-head{ font-size:0.72rem; letter-spacing:0.16em; color:var(--text-secondary); font-weight:700; }
+    .steps{ margin-top:12px; display:flex; flex-direction:column; gap:10px; flex-grow:1; }
+    .step{
+      display:grid; grid-template-columns:32px 1fr; gap:12px; align-items:flex-start;
+    }
+    .step-no2{
+      width:28px; height:28px; border-radius:6px;
+      background:rgba(37,99,235,0.1); color:var(--accent);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:0.85rem; flex-shrink:0;
+    }
+    .step-text{ font-size:0.92rem; line-height:1.55; color:var(--text); }
+    .step-text code, .step-text .formula{
+      font-family:'Inter', monospace; font-size:0.88rem;
+      background:var(--surface-hover); padding:2px 6px; border-radius:4px;
+      color:var(--accent); font-weight:600;
+    }
+
+    .answer-box{
+      margin-top:16px; padding:14px 18px;
+      background:linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(124,58,237,0.06) 100%);
+      border:1px solid var(--accent); border-radius:10px;
+    }
+    .q-solve.s1 .answer-box{ border-color:var(--section-1); }
+    .q-solve.s2 .answer-box{ border-color:var(--section-2); }
+    .q-solve.s3 .answer-box{ border-color:var(--section-3); }
+    .answer-label{ font-size:0.7rem; letter-spacing:0.18em; color:var(--accent); font-weight:700; }
+    .q-solve.s1 .answer-label{ color:var(--section-1); }
+    .q-solve.s2 .answer-label{ color:var(--section-2); }
+    .q-solve.s3 .answer-label{ color:var(--section-3); }
+    .answer-value{ font-size:1.25rem; font-weight:800; margin-top:4px; color:var(--text); line-height:1.4; }
+    .answer-value .accent{ color:var(--accent); }
+
+    /* ===== 사업 직무 — 컴팩트 카드 그리드 ===== */
+    .pm-grid{
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:14px; margin-top:14px;
+    }
+    .pm-card{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; padding:18px;
+    }
+    .pm-card .ptag{ font-size:0.7rem; letter-spacing:0.16em; color:var(--section-3); font-weight:700; }
+    .pm-card .ptitle{ font-size:1rem; font-weight:700; margin-top:4px; }
+    .pm-card .pbody{ font-size:0.86rem; color:var(--text-secondary); margin-top:8px; line-height:1.55; }
+    .pm-card .pbody ul{ list-style:none; margin-top:4px; }
+    .pm-card .pbody li{ padding-left:12px; position:relative; margin-top:3px; }
+    .pm-card .pbody li::before{ content:'·'; position:absolute; left:2px; color:var(--section-3); font-weight:700; }
+
+    /* ===== Phase 카드 (사업 2번용) ===== */
+    .phase-flow{
+      display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:12px;
+    }
+    .phase-card{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; padding:16px;
+      border-top:3px solid var(--section-3);
+    }
+    .phase-card .ph-no{ font-size:0.68rem; letter-spacing:0.16em; color:var(--section-3); font-weight:700; }
+    .phase-card .ph-ttl{ font-size:1.05rem; font-weight:700; margin-top:4px; }
+    .phase-card .ph-sub{ font-size:0.78rem; color:var(--text-secondary); margin-top:4px; }
+    .phase-card .ph-kpi, .phase-card .ph-act{
+      margin-top:10px; padding-top:10px; border-top:1px dashed var(--border);
+    }
+    .phase-card .ph-lbl{ font-size:0.68rem; color:var(--section-3); font-weight:700; letter-spacing:0.1em; }
+    .phase-card .ph-body{ font-size:0.82rem; color:var(--text); margin-top:4px; line-height:1.5; }
+
+    /* ===== Step 리스트 (사업 3·4번) ===== */
+    .step-list{ display:flex; flex-direction:column; gap:10px; margin-top:12px; }
+    .step-row{
+      display:grid; grid-template-columns:60px 1fr; gap:14px;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:8px; padding:14px 18px;
+      align-items:center;
+    }
+    .step-row .row-no{
+      font-size:1.4rem; font-weight:800; color:var(--section-3); letter-spacing:-0.04em;
+    }
+    .step-row .row-body{ font-size:0.9rem; line-height:1.5; }
+    .step-row .row-body .row-ttl{ font-weight:700; color:var(--text); font-size:0.95rem; }
+    .step-row .row-body .row-desc{ color:var(--text-secondary); margin-top:2px; }
+
+    /* ===== 시장 비교 표 (사업 5번) ===== */
+    .market-grid{
+      display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:12px;
+    }
+    .market-card{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; padding:18px;
+      border-top:3px solid var(--section-3);
+    }
+    .market-card .mk-head{ font-size:1.1rem; font-weight:800; color:var(--section-3); }
+    .market-card .mk-tag{ font-size:0.72rem; color:var(--text-secondary); margin-top:2px; }
+    .market-card .mk-block{ margin-top:12px; padding-top:10px; border-top:1px dashed var(--border); }
+    .market-card .mk-lbl{ font-size:0.68rem; color:var(--section-3); font-weight:700; letter-spacing:0.1em; }
+    .market-card .mk-body{ font-size:0.82rem; color:var(--text); margin-top:4px; line-height:1.55; }
+
+    .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px; }
+    @media(max-width:1000px){
+      .phase-flow,.market-grid{ grid-template-columns:1fr; }
+      .grid-2{ grid-template-columns:1fr; }
+    }
+
+    /* ===== F2P vs 구독형 Before/After ===== */
+    .vs-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:14px; }
+    .vs-card{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:12px; padding:22px;
+    }
+    .vs-card .vs-tag{ font-size:0.72rem; letter-spacing:0.18em; color:var(--section-3); font-weight:700; }
+    .vs-card .vs-ttl{ font-size:1.2rem; font-weight:800; margin-top:4px; }
+    .vs-card .vs-block{ margin-top:12px; }
+    .vs-card .vs-lbl{ font-size:0.7rem; color:var(--text-secondary); letter-spacing:0.1em; font-weight:700; }
+    .vs-card .vs-list{ list-style:none; margin-top:4px; font-size:0.86rem; }
+    .vs-card .vs-list li{ padding-left:14px; position:relative; margin-top:4px; line-height:1.5; }
+    .vs-card .vs-list li::before{ content:'·'; position:absolute; left:2px; color:var(--section-3); font-weight:700; }
+    @media(max-width:1000px){ .vs-grid{ grid-template-columns:1fr; } }
+
+    /* ===== 클로징 체크리스트 ===== */
+    .closing-list{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; margin-top:24px; }
+    @media(max-width:900px){ .closing-list{ grid-template-columns:1fr; } }
+    .closing-item{
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:10px; padding:18px 20px;
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .closing-mark{
+      flex-shrink:0; width:30px; height:30px; border-radius:50%;
+      background:rgba(37,99,235,0.12); color:var(--accent);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:800; font-size:0.95rem;
+    }
+    .closing-text{ font-size:0.95rem; line-height:1.5; }
+    .closing-text strong{ color:var(--accent); }
+    .closing-foot{ margin-top:48px; font-size:0.85rem; color:var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="메뉴">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()">
+        <svg id="themeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <span id="themeLabel">Light</span>
+      </button>
+      <button onclick="downloadImage()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>PNG 다운로드</span>
+      </button>
+      <button onclick="window.print()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        <span>인쇄 / PDF</span>
+      </button>
+      <button onclick="toggleEdit()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+        <span id="editMenuLabel">편집 모드</span>
+      </button>
+    </div>
+  </div>
+
+  <main id="main-content" role="main">
+
+    <!-- 1. 타이틀 -->
+    <section class="slide active title-slide">
+      <div class="slide-inner">
+        <div class="title-tag">2026 상반기 공채 대비 · 신규 출제 모의고사</div>
+        <h1 class="title-main">웹젠 필기테스트 모의고사<br><span style="color:var(--accent);">사업PM 부문</span></h1>
+        <p class="slide-sub" style="margin-top:28px;">2025년까지 출제 유형을 기반으로 신규 작성한 모의고사입니다.<br>풀이 흐름을 손에 익혀 숫자만 바꿔 출제되어도 풀 수 있게 — 그게 이 자료의 목적입니다.</p>
+        <div class="title-meta">
+          <div><strong>인적성 수리</strong> &nbsp; 5문제</div>
+          <div><strong>서술형 수리</strong> &nbsp; 5문제</div>
+          <div><strong>사업 직무 서술형</strong> &nbsp; 5문제</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 시험 구조 KPI -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s1">Overview</span>
+        <h2 class="slide-title">모의고사 구조</h2>
+        <p class="slide-sub">3개 영역 × 5문제 = 총 15문제. 영역마다 검증 포인트가 다릅니다.</p>
+        <div class="kpi-grid">
+          <div class="kpi-card s1">
+            <div class="label">SECTION 01 · 인적성 수리</div>
+            <div class="value">5</div>
+            <div class="desc">순수 수리 — 농도·일률·기차·확률·연립방정식. 직무 연계 X.</div>
+          </div>
+          <div class="kpi-card s2">
+            <div class="label">SECTION 02 · 서술형 수리</div>
+            <div class="value">5</div>
+            <div class="desc">게임 KPI 응용 — 리텐션·가챠·ROI·DAU·기댓값. 사업 감각 검증.</div>
+          </div>
+          <div class="kpi-card s3">
+            <div class="label">SECTION 03 · 사업 직무</div>
+            <div class="value">5</div>
+            <div class="desc">BM·KPI·진단·VOC·글로벌 — 본인 사례·근거·결론 톤 A4 1장.</div>
+          </div>
+        </div>
+        <p class="slide-sub" style="margin-top:24px; font-size:0.92rem;">
+          <strong style="color:var(--text);">학습 포인트</strong> — 정답을 외우는 게 아니라 풀이 흐름을 손에 익혀 변형 가능하게 연습. 작년 하반기부터 서술형 수리 난이도가 높아진 추세입니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 1 · 인적성 수리
+    ============================================ -->
+
+    <!-- 3. SECTION 1 디바이더 -->
+    <section class="slide section-divider s1">
+      <div class="slide-inner">
+        <div class="section-no">01</div>
+        <span class="section-tag">Section · 인적성 수리</span>
+        <h2 class="section-title">공통 수리 · 5문제</h2>
+        <p class="section-sub">기존 1~22번 유형 기반 일반 인적성 수학. 직무 연계 없는 순수 수리입니다.</p>
+        <div class="section-list">
+          <div class="item"><div class="no">Q01</div><div class="ttl">농도 — 혼합 + 증발</div></div>
+          <div class="item"><div class="no">Q02</div><div class="ttl">일률 — 함께 일하기 + 교체</div></div>
+          <div class="item"><div class="no">Q03</div><div class="ttl">기차·터널 — 통과 거리</div></div>
+          <div class="item"><div class="no">Q04</div><div class="ttl">확률 — 동일색 공 추출</div></div>
+          <div class="item"><div class="no">Q05</div><div class="ttl">연립방정식 — 형제 나이</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 인적성 1 — 농도 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s1">Section 01 · Q1</span>
+        <h2 class="slide-title">농도 — 혼합 + 증발</h2>
+        <div class="q-layout">
+          <div class="q-prompt s1">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">소금물 농도</div>
+            <div class="q-body">
+              10% 농도 소금물 <b>300g</b>과 25% 농도 소금물 <b>200g</b>을 섞은 후, 물 <b>100g</b>을 증발시키면 최종 농도는 몇 %인가?
+            </div>
+            <div class="q-sub">함정 — 증발하는 건 물뿐, 소금량은 보존됨.</div>
+          </div>
+          <div class="q-solve s1">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">10% 300g 안 소금: <span class="formula">300 × 0.10 = 30g</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">25% 200g 안 소금: <span class="formula">200 × 0.25 = 50g</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">혼합 후 총 소금 <span class="formula">30 + 50 = 80g</span>, 총 무게 <span class="formula">500g</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">물 100g 증발 → 총 무게 <span class="formula">500 − 100 = 400g</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">농도 = <span class="formula">80 ÷ 400 × 100</span></div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value"><span class="accent">20%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 인적성 2 — 일률 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s1">Section 01 · Q2</span>
+        <h2 class="slide-title">일률 — 함께 일하기 + 교체</h2>
+        <div class="q-layout">
+          <div class="q-prompt s1">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">A·B 협업 일률</div>
+            <div class="q-body">
+              A는 어떤 일을 혼자 8일, B는 12일이 걸린다.
+              <ul>
+                <li><b>(1)</b> A·B가 처음부터 함께 일하면 며칠?</li>
+                <li><b>(2)</b> 처음 2일 함께, 나머지 A 혼자 — 총 며칠?</li>
+              </ul>
+            </div>
+            <div class="q-sub">핵심 — 1일 일률 = 1/소요일수. 더해서 함께 일률.</div>
+          </div>
+          <div class="q-solve s1">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">A 1일 일률 <span class="formula">1/8</span>, B 1일 일률 <span class="formula">1/12</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">함께 1일 일률 <span class="formula">1/8 + 1/12 = 5/24</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">(1) 끝나는 시간 <span class="formula">1 ÷ 5/24 = 24/5 = 4.8일</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">(2) 2일 진행분 <span class="formula">2 × 5/24 = 5/12</span>, 남은 일 <span class="formula">7/12</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">A 혼자 남은 일 <span class="formula">7/12 ÷ 1/8 = 14/3일</span></div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value">(1) <span class="accent">4.8일</span> · (2) <span class="accent">약 6.67일 (20/3일)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 인적성 3 — 기차/터널 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s1">Section 01 · Q3</span>
+        <h2 class="slide-title">기차·터널 — 통과 거리</h2>
+        <div class="q-layout">
+          <div class="q-prompt s1">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">완전 통과 시간</div>
+            <div class="q-body">
+              길이 <b>200m</b> 기차가 일정 속력으로 <b>500m</b> 다리를 <b>완전히</b> 건너는 데 <b>28초</b>가 걸렸다. 같은 속력으로 <b>1km(1,000m)</b> 터널을 완전히 통과하려면 몇 초?
+            </div>
+            <div class="q-sub">함정 — <b>완전히</b> = 다리(터널) 길이 + 기차 길이.</div>
+          </div>
+          <div class="q-solve s1">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">완전 통과 거리 = <span class="formula">500 + 200 = 700m</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">속력 = <span class="formula">700 ÷ 28 = 25 m/s</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">터널 완전 통과 거리 = <span class="formula">1,000 + 200 = 1,200m</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">시간 = <span class="formula">1,200 ÷ 25</span></div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value"><span class="accent">48초</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 인적성 4 — 확률 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s1">Section 01 · Q4</span>
+        <h2 class="slide-title">확률 — 같은 색 공 추출</h2>
+        <div class="q-layout">
+          <div class="q-prompt s1">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">동시 추출 확률</div>
+            <div class="q-body">
+              빨강 <b>4</b>, 파랑 <b>3</b>, 노랑 <b>2</b>이 든 주머니에서 동시에 2개를 꺼낼 때, 두 공의 색이 <b>같을</b> 확률은?
+            </div>
+            <div class="q-sub">조합 공식 — <span class="formula">nC2 = n(n−1)/2</span></div>
+          </div>
+          <div class="q-solve s1">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">전체 9개 중 2개: <span class="formula">9C2 = 36</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">빨강 4 중 2: <span class="formula">4C2 = 6</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">파랑 3 중 2: <span class="formula">3C2 = 3</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">노랑 2 중 2: <span class="formula">2C2 = 1</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">같은 색 합계 <span class="formula">6 + 3 + 1 = 10</span></div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value"><span class="accent">5/18</span> &nbsp;<span style="font-size:0.9rem; color:var(--text-secondary);">(≈ 27.78%)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. 인적성 5 — 연립방정식 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s1">Section 01 · Q5</span>
+        <h2 class="slide-title">연립방정식 — 형제 나이</h2>
+        <div class="q-layout">
+          <div class="q-prompt s1">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">현재 형·동생 나이</div>
+            <div class="q-body">
+              두 형제의 현재 나이의 합은 <b>32세</b>. <b>4년 전</b> 형의 나이는 동생 나이의 <b>3배</b>였다. 현재 형과 동생의 나이는?
+            </div>
+            <div class="q-sub">팁 — 변수 2개 → 식 2개 세우고 대입.</div>
+          </div>
+          <div class="q-solve s1">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">형 X, 동생 Y · 조건1: <span class="formula">X + Y = 32</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">조건2: <span class="formula">X − 4 = 3(Y − 4)</span> → <span class="formula">X = 3Y − 8</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">대입: <span class="formula">3Y − 8 + Y = 32</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text"><span class="formula">4Y = 40</span> → Y = 10, X = 22</div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">검산 — 4년 전 형 18 = 3 × 6 (동생 6) ✓</div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value">형 <span class="accent">22세</span> · 동생 <span class="accent">10세</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 2 · 서술형 수리 (게임 KPI 응용)
+    ============================================ -->
+
+    <!-- 9. SECTION 2 디바이더 -->
+    <section class="slide section-divider s2">
+      <div class="slide-inner">
+        <div class="section-no">02</div>
+        <span class="section-tag">Section · 서술형 수리</span>
+        <h2 class="section-title">게임 KPI 응용 · 5문제</h2>
+        <p class="section-sub">사업PM이 매일 보는 지표 — 리텐션·가챠·ROI·DAU·기댓값. 숫자만 다른 동일 유형이 반복 출제됩니다.</p>
+        <div class="section-list">
+          <div class="item"><div class="no">Q01</div><div class="ttl">D+N 리텐션 + 실인원 환산</div></div>
+          <div class="item"><div class="no">Q02</div><div class="ttl">가챠 천장 + 기댓값 + 결제 환산</div></div>
+          <div class="item"><div class="no">Q03</div><div class="ttl">시즌패스 BM 손익분기 + ROI</div></div>
+          <div class="item"><div class="no">Q04</div><div class="ttl">이탈·신규 → 30일 후 DAU</div></div>
+          <div class="item"><div class="no">Q05</div><div class="ttl">이벤트 보상 + 가챠 결합</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. 수리 1 — D+N 리텐션 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s2">Section 02 · Q1</span>
+        <h2 class="slide-title">D+N 리텐션 + 실인원 환산</h2>
+        <div class="q-layout">
+          <div class="q-prompt s2">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">신작 7일 신규 유저 일지</div>
+            <div class="q-body">
+              <table>
+                <thead><tr><th>Day</th><th>Users</th><th>D0</th><th>D1</th><th>D3</th><th>D7</th></tr></thead>
+                <tbody>
+                  <tr><td>8/1</td><td>50,000</td><td>100%</td><td>60%</td><td>40%</td><td>20%</td></tr>
+                  <tr><td>8/2</td><td>40,000</td><td>100%</td><td>55%</td><td>38%</td><td>18%</td></tr>
+                  <tr><td>8/3</td><td>30,000</td><td>100%</td><td>50%</td><td>35%</td><td>–</td></tr>
+                </tbody>
+              </table>
+              <ul style="margin-top:10px;">
+                <li>(1) 8/1·8/2·8/3 <b>D+1 평균 리텐션</b>을 <b>실인원 기반</b>으로</li>
+                <li>(2) 8/1 코호트 <b>D+7 누적 이탈</b> 인원</li>
+                <li>(3) 가장 큰 단일 구간 이탈 시점</li>
+              </ul>
+            </div>
+            <div class="q-sub"><b>함정</b> — % 단순 평균 X. 실인원 분자·분모로 계산.</div>
+          </div>
+          <div class="q-solve s2">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">실인원 분자 <span class="formula">30,000 + 22,000 + 15,000 = 67,000</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">분모 <span class="formula">50,000 + 40,000 + 30,000 = 120,000</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">(1) D+1 평균 <span class="formula">67,000 / 120,000 ≈ 55.83%</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">(2) 8/1 D+7 잔존 <span class="formula">10,000</span> → 누적 이탈 <span class="formula">40,000명</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">(3) D0 → D1 구간 <b>40%p</b> 이탈 — 온보딩 첫 24h 핵심</div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value">(1) <span class="accent">≈55.83%</span> · (2) <span class="accent">40,000명</span> · (3) <span class="accent">D0→D1 (40%p)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. 수리 2 — 가챠 천장 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s2">Section 02 · Q2</span>
+        <h2 class="slide-title">가챠 천장 + 기댓값 + 결제 환산</h2>
+        <div class="q-layout">
+          <div class="q-prompt s2">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">픽업 가챠 시스템</div>
+            <div class="q-body">
+              <ul>
+                <li>픽업 확률 <b>0.5%</b></li>
+                <li>천장 <b>200회</b> 누적 시 픽업 1회 확정</li>
+                <li>가챠 1회 <b>3,000원</b></li>
+              </ul>
+              <ul style="margin-top:10px;">
+                <li>(1) 천장 도달 시 총 결제 비용</li>
+                <li>(2) 천장 없을 때 평균 시도 (기댓값)</li>
+                <li>(3) 100만원 결제 시 평균 픽업 획득 횟수</li>
+              </ul>
+            </div>
+            <div class="q-sub">기하분포 평균 시도 = <span class="formula">1/p</span></div>
+          </div>
+          <div class="q-solve s2">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">(1) <span class="formula">200 × 3,000 = 600,000원</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">(2) <span class="formula">1 / 0.005 = 200회</span> — 천장과 동일치</div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">(3) 100만원 / 3,000원 = <b>333회</b> 가챠</div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">천장 1회 확정 + 잔여 <span class="formula">133 × 0.5% = 0.665회</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">합산 <span class="formula">1 + 0.665 ≈ 1.66회</span></div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value">(1) <span class="accent">600,000원</span> · (2) <span class="accent">평균 200회</span> · (3) <span class="accent">약 1.66회</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. 수리 3 — 시즌패스 BM ROI -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s2">Section 02 · Q3</span>
+        <h2 class="slide-title">시즌패스 BM 손익분기 + ROI</h2>
+        <div class="q-layout">
+          <div class="q-prompt s2">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">신작 시즌패스 운영</div>
+            <div class="q-body">
+              <ul>
+                <li>패스 단가 <b>9,900원</b> · 시즌 <b>30일</b></li>
+                <li>일일 운영비 <b>500,000원</b></li>
+                <li>구매 유저 누적 <b>1,500명</b></li>
+              </ul>
+              <ul style="margin-top:10px;">
+                <li>(1) 시즌 매출 / (2) 시즌 비용</li>
+                <li>(3) ROI (%) / (4) 손익분기 최소 구매 유저 수</li>
+              </ul>
+            </div>
+            <div class="q-sub">ROI = <span class="formula">(매출 − 비용) / 비용 × 100</span></div>
+          </div>
+          <div class="q-solve s2">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">매출 <span class="formula">1,500 × 9,900 = 14,850,000원</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">비용 <span class="formula">30 × 500,000 = 15,000,000원</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">ROI <span class="formula">(−150,000 / 15,000,000) × 100 = −1%</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">손익분기 <span class="formula">15,000,000 / 9,900 ≈ 1,515.15</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text"><b>넘으려면</b> 올림 → <b>1,516명</b></div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value">(1) <span class="accent">1,485만원</span> · (2) <span class="accent">1,500만원</span> · (3) <span class="accent">ROI −1%</span> · (4) <span class="accent">1,516명</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. 수리 4 — 30일 DAU -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s2">Section 02 · Q4</span>
+        <h2 class="slide-title">이탈률·신규 → 30일 후 DAU</h2>
+        <div class="q-layout">
+          <div class="q-prompt s2">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">라이브 서비스 DAU 변화</div>
+            <div class="q-body">
+              <ul>
+                <li>현재 DAU <b>100,000명</b></li>
+                <li>일간 이탈률 <b>5%</b></li>
+                <li>일간 신규 유입률 <b>3%</b> (현재 DAU 대비)</li>
+              </ul>
+              <p style="margin-top:10px;">매일 위 비율 동일 시, <b>30일 후 DAU</b>는 약 몇 명?</p>
+            </div>
+            <div class="q-sub">일간 변화율 = (1 − 5%) + 3% = <span class="formula">0.98</span></div>
+          </div>
+          <div class="q-solve s2">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">잔존율 <span class="formula">98% = 0.98</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">30일 후 <span class="formula">100,000 × (0.98)^30</span></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text"><span class="formula">ln(0.98) × 30 ≈ −0.6061</span></div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text"><span class="formula">e^(−0.6061) ≈ 0.5455</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">운영 시사 — 신규 &lt; 이탈이면 <b>복리적 감소</b></div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value">약 <span class="accent">54,500명</span> · 현재 대비 약 <span class="accent">45.5% 감소</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. 수리 5 — 이벤트 보상 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s2">Section 02 · Q5</span>
+        <h2 class="slide-title">이벤트 보상 + 가챠 결합</h2>
+        <div class="q-layout">
+          <div class="q-prompt s2">
+            <div class="q-no">문제</div>
+            <div class="q-title-text">7일 출석 이벤트</div>
+            <div class="q-body">
+              <ul>
+                <li>일일 출석 보상 다이아 <b>10개</b></li>
+                <li>누적 7일 보상 다이아 <b>100개</b></li>
+                <li>가챠 1회 = <b>30 다이아</b>, 픽업 <b>5%</b></li>
+              </ul>
+              <p style="margin-top:10px;">7일 모두 출석 시 — (1) 다이아 총량 / (2) 가챠 횟수(정수) / (3) 픽업 기댓값</p>
+            </div>
+            <div class="q-sub">팁 — 정수 변환 시 버림. 잔여 다이아는 다음 시즌 이월.</div>
+          </div>
+          <div class="q-solve s2">
+            <div class="solve-head">풀이 단계</div>
+            <div class="steps">
+              <div class="step"><div class="step-no2">1</div><div class="step-text">일일 보상 <span class="formula">10 × 7 = 70</span></div></div>
+              <div class="step"><div class="step-no2">2</div><div class="step-text">누적 보상 <span class="formula">+100</span> → 합계 <b>170</b></div></div>
+              <div class="step"><div class="step-no2">3</div><div class="step-text">가챠 <span class="formula">170 / 30 = 5.66</span> → 5회 (잔여 20)</div></div>
+              <div class="step"><div class="step-no2">4</div><div class="step-text">기댓값 <span class="formula">5 × 5% = 0.25회</span></div></div>
+              <div class="step"><div class="step-no2">5</div><div class="step-text">해석 — 4명 중 1명이 픽업 1회 획득</div></div>
+            </div>
+            <div class="answer-box">
+              <div class="answer-label">정답</div>
+              <div class="answer-value">(1) <span class="accent">170개</span> · (2) <span class="accent">5회</span> · (3) <span class="accent">0.25회</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SECTION 3 · 사업 직무 서술형
+    ============================================ -->
+
+    <!-- 15. SECTION 3 디바이더 -->
+    <section class="slide section-divider s3">
+      <div class="slide-inner">
+        <div class="section-no">03</div>
+        <span class="section-tag">Section · 사업 직무</span>
+        <h2 class="section-title">사업 직무 서술형 · 5문제</h2>
+        <p class="section-sub">정답 없음. 본인 사례·근거·결론 톤으로 A4 1장 — 그게 채점 기준입니다.</p>
+        <div class="section-list">
+          <div class="item"><div class="no">Q01</div><div class="ttl">F2P vs 구독형 BM + 모바일 RPG 선택</div></div>
+          <div class="item"><div class="no">Q02</div><div class="ttl">사전예약 → 출시 → 첫 한 달 KPI·액션</div></div>
+          <div class="item"><div class="no">Q03</div><div class="ttl">장수 IP 매출 하락 진단 → 5단계</div></div>
+          <div class="item"><div class="no">Q04</div><div class="ttl">이탈 분석 → Pain Point → 운영 액션</div></div>
+          <div class="item"><div class="no">Q05</div><div class="ttl">한국 IP 글로벌 진출 — 시장별 차별화</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. 사업 1 — F2P vs 구독형 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s3">Section 03 · Q1</span>
+        <h2 class="slide-title">F2P vs 구독형 — 모바일 RPG 선택</h2>
+        <p class="slide-sub">두 모델의 강점·약점을 비교하고, 본인이 신작 모바일 RPG 사업PM이라면 무엇을 택할지 근거와 함께. (A4 1장)</p>
+        <div class="vs-grid">
+          <div class="vs-card">
+            <div class="vs-tag">F2P · Free-to-Play</div>
+            <div class="vs-ttl">진입 장벽 0 · 롱테일 LTV</div>
+            <div class="vs-block">
+              <div class="vs-lbl">강점</div>
+              <ul class="vs-list">
+                <li>대규모 유저 풀 + 무과금도 바이럴 자산</li>
+                <li>과금 유저 LTV 극대화 (롱테일)</li>
+                <li>리그 오브 레전드 · 검은사막 등 사례</li>
+              </ul>
+            </div>
+            <div class="vs-block">
+              <div class="vs-lbl">약점</div>
+              <ul class="vs-list">
+                <li>PUR 2~5% — 무과금 비중 큼</li>
+                <li>이벤트·패치 운영 부담</li>
+                <li>확률형 BM 규제 리스크 (한·중·EU)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="vs-card">
+            <div class="vs-tag">구독형 · Subscription</div>
+            <div class="vs-ttl">매출 예측 가능성 ↑</div>
+            <div class="vs-block">
+              <div class="vs-lbl">강점</div>
+              <ul class="vs-list">
+                <li>월간 정기 결제 → 매출 안정</li>
+                <li>확정 보상 → 유저 만족도 안정</li>
+                <li>WoW · FF14 · Xbox Game Pass</li>
+              </ul>
+            </div>
+            <div class="vs-block">
+              <div class="vs-lbl">약점</div>
+              <ul class="vs-list">
+                <li>월 결제 진입 장벽</li>
+                <li>대형 IP·콘텐츠 볼륨 필수</li>
+                <li>모바일 시장 표준 X</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="answer-box" style="margin-top:18px;">
+          <div class="answer-label">권장 결론</div>
+          <div class="answer-value" style="font-size:1.05rem; line-height:1.55;">
+            <span class="accent">F2P + 시즌패스 + 코스메틱 Hybrid</span> &nbsp;—&nbsp; 모바일 표준 진입 장벽 0 + 시즌패스로 예측 가능성 + 코스메틱으로 과금 강제성↓ + 천장·확률 공개로 규제 회피.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17. 사업 2 — 사전예약 → 출시 → 첫 달 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s3">Section 03 · Q2</span>
+        <h2 class="slide-title">사전예약 → 출시 → 첫 한 달 KPI·액션</h2>
+        <p class="slide-sub">단계마다 핵심 KPI가 다릅니다. 사업PM은 매주 핵심 지표를 재정의하고 액션을 분배해야 합니다.</p>
+        <div class="phase-flow">
+          <div class="phase-card">
+            <div class="ph-no">PHASE 1 · D−30 ~ D−1</div>
+            <div class="ph-ttl">사전예약</div>
+            <div class="ph-sub">인지·기대감 형성</div>
+            <div class="ph-kpi">
+              <div class="ph-lbl">KPI</div>
+              <div class="ph-body">사전예약자 수 (100만 목표) · 페이지 CTR (5%+) · 소셜 언급 · 미디어 노출</div>
+            </div>
+            <div class="ph-act">
+              <div class="ph-lbl">액션</div>
+              <div class="ph-body">단계별 보상(10·50·100만) · 인플루언서 사전 시연 · 티저 단계 공개 · 디스코드 오픈</div>
+            </div>
+          </div>
+          <div class="phase-card">
+            <div class="ph-no">PHASE 2 · D+0 ~ D+7</div>
+            <div class="ph-ttl">출시 첫 주</div>
+            <div class="ph-sub">안정화 · 1차 리텐션</div>
+            <div class="ph-kpi">
+              <div class="ph-lbl">KPI</div>
+              <div class="ph-body">DAU·NRU·CCU · D+1·D+3 리텐션 · 매출·PU·PUR · 서버 안정성 · 평점</div>
+            </div>
+            <div class="ph-act">
+              <div class="ph-lbl">액션</div>
+              <div class="ph-body">출시 이벤트 · 서버 모니터링 · Day3~5 핫픽스 · 인플루언서 라이브 · VOC 1차 대응</div>
+            </div>
+          </div>
+          <div class="phase-card">
+            <div class="ph-no">PHASE 3 · D+8 ~ D+30</div>
+            <div class="ph-ttl">첫 한 달</div>
+            <div class="ph-sub">매출 구조화 · 정착</div>
+            <div class="ph-kpi">
+              <div class="ph-lbl">KPI</div>
+              <div class="ph-body">D+7·14·30 리텐션 · ARPU·ARPPU·PUR · DAU/MAU 스티키니스 · 시즌패스 전환율</div>
+            </div>
+            <div class="ph-act">
+              <div class="ph-lbl">액션</div>
+              <div class="ph-body">첫 시즌패스 (Day14~21) · 신규 콘텐츠 · 밸런스 패치 · 광고 효율 측정 · 예산 재배분</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. 사업 3 — 매출 하락 5단계 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s3">Section 03 · Q3</span>
+        <h2 class="slide-title">장수 IP 매출 하락 — 진단 5단계</h2>
+        <p class="slide-sub">분기 매출이 전년 동기 대비 25% 하락. 사업PM은 진단 → 가설 → 액션 → 검증 순환 구조로 접근합니다.</p>
+        <div class="step-list">
+          <div class="step-row">
+            <div class="row-no">1</div>
+            <div class="row-body">
+              <div class="row-ttl">진단 — 지표 분리 분석</div>
+              <div class="row-desc">DAU·MAU·PUR·ARPU·리텐션·NRU·LTV 추세 — <b>유입 부족 / 이탈 가속 / 객단가 감소</b> 중 어디인지 식별</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">2</div>
+            <div class="row-body">
+              <div class="row-ttl">원인 파악 — 카테고리 분류</div>
+              <div class="row-desc">콘텐츠 소진 · BM 피로 · 경쟁작 등장 · 운영 이슈 · 마케팅 효율 저하 — 5축으로 분해</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">3</div>
+            <div class="row-body">
+              <div class="row-ttl">가설 수립 — 우선순위</div>
+              <div class="row-desc">예: 콘텐츠 40% &gt; BM 30% &gt; 경쟁작 20% &gt; 마케팅 10% — 각 가설별 측정 가능한 KPI 정의</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">4</div>
+            <div class="row-body">
+              <div class="row-ttl">액션 — 단기·중기·장기 분리</div>
+              <div class="row-desc">단기 IP 콜라보·복귀 캠페인·확률 공개 / 중기 신규 캐릭·VOC 밸런스 / 장기 차기 시즌·IP 확장</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">5</div>
+            <div class="row-body">
+              <div class="row-ttl">검증 — KPI 재측정 · A/B 테스트</div>
+              <div class="row-desc">동일 KPI 재측정 · A/B로 단일 액션 효과 분리 · 회복 안 될 시 가설 재수립 (Step 3 회귀)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19. 사업 4 — 이탈 Pain Point -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s3">Section 03 · Q4</span>
+        <h2 class="slide-title">이탈 분석 → Pain Point → 운영 액션</h2>
+        <p class="slide-sub">퀀트(로그) + 퀄(VOC) 결합이 핵심. Pain Point 우선순위는 <b>심각도 × 빈도</b>로 결정합니다.</p>
+        <div class="step-list">
+          <div class="step-row">
+            <div class="row-no">1</div>
+            <div class="row-body">
+              <div class="row-ttl">이탈 유저 정의</div>
+              <div class="row-desc">D+7 단기 / D+30 장기 / D+90 완전 이탈 — 정의에 따라 후속 분석 셋이 달라짐</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">2</div>
+            <div class="row-body">
+              <div class="row-ttl">퀀트 — 이탈 직전 행동 로그</div>
+              <div class="row-desc">마지막 진행 콘텐츠·결제·CS·소셜 활동 → 공통 패턴 추출</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">3</div>
+            <div class="row-body">
+              <div class="row-ttl">퀄 — VOC 수집</div>
+              <div class="row-desc">이탈 설문·앱스토어 리뷰·커뮤니티·1:1 인터뷰 → 사유 카테고리화</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">4</div>
+            <div class="row-body">
+              <div class="row-ttl">Pain Point 5 카테고리</div>
+              <div class="row-desc">성장 정체 · BM 피로 · 콘텐츠 부족 · 기술 이슈 · 소셜 이슈 — 심각도 × 빈도 매트릭스</div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="row-no">5</div>
+            <div class="row-body">
+              <div class="row-ttl">운영 액션 매핑</div>
+              <div class="row-desc">정체→온보딩 강화 · BM→확률공개·천장 · 콘텐츠→신규 던전 · 기술→안정화 · 소셜→길드 개편 + 복귀 캠페인</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20. 사업 5 — 글로벌 진출 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <span class="eyebrow s3">Section 03 · Q5</span>
+        <h2 class="slide-title">한국 IP 글로벌 진출 — 시장별 차별화</h2>
+        <p class="slide-sub">한국 BM·이벤트 그대로 수출 = 가장 큰 실패 패턴. 결제 문화 · 콘텐츠 취향 · 규제 — 3축 현지화 필수.</p>
+        <div class="market-grid">
+          <div class="market-card">
+            <div class="mk-head">동남아</div>
+            <div class="mk-tag">인도네시아·태국·베트남·필리핀</div>
+            <div class="mk-block">
+              <div class="mk-lbl">특성</div>
+              <div class="mk-body">객단가↓·PUR↓ · 모바일 보급↑ · 로컬 결제(GCash·Dana·OVO) · 소셜 친화</div>
+            </div>
+            <div class="mk-block">
+              <div class="mk-lbl">BM</div>
+              <div class="mk-body">저단가 패키지($0.99~4.99) · Rewarded Ad · 로컬 결제 통합 · 단기 시즌패스</div>
+            </div>
+            <div class="mk-block">
+              <div class="mk-lbl">이벤트</div>
+              <div class="mk-body">길드 협동 · 라마단·송끄란 로컬 · TikTok 인플루언서 라이브</div>
+            </div>
+          </div>
+          <div class="market-card">
+            <div class="mk-head">일본</div>
+            <div class="mk-tag">ARPPU 글로벌 1위</div>
+            <div class="mk-block">
+              <div class="mk-lbl">특성</div>
+              <div class="mk-body">가챠 친화·서브컬처 강세 · 캐릭터 IP·콜라보 민감 · 운영 신뢰·정중함 중시</div>
+            </div>
+            <div class="mk-block">
+              <div class="mk-lbl">BM</div>
+              <div class="mk-body">가챠 중심 + 확률 공개 · 픽업·한정·천장 · 시즌패스 + 월정액 · 굿즈·오프라인 콜라보</div>
+            </div>
+            <div class="mk-block">
+              <div class="mk-lbl">이벤트</div>
+              <div class="mk-body">애니·만화·아이돌 콜라보 · 캐릭터 생일·성우 이벤트 · TGS·코미케 오프라인</div>
+            </div>
+          </div>
+          <div class="market-card">
+            <div class="mk-head">북미</div>
+            <div class="mk-tag">콘솔·PC 친화 · Loot Box 규제</div>
+            <div class="mk-block">
+              <div class="mk-lbl">특성</div>
+              <div class="mk-body">모바일은 캐주얼 중심 · 확률형 BM 부정적 · 코스메틱·구독형 친화 · e스포츠·스트리밍 강</div>
+            </div>
+            <div class="mk-block">
+              <div class="mk-lbl">BM</div>
+              <div class="mk-body">배틀패스·시즌패스 중심 (확정 보상) · 코스메틱(스킨·이모티콘) · 구독형 멤버십 · 천장 명시</div>
+            </div>
+            <div class="mk-block">
+              <div class="mk-lbl">이벤트</div>
+              <div class="mk-body">시즌제 (3~4개월) · e스포츠 토너먼트 · Twitch·YouTube 스트리머 · 핼러윈·크리스마스·블프</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21. 학습 전략 & 클로징 -->
+    <section class="slide title-slide">
+      <div class="slide-inner">
+        <span class="eyebrow s1" style="border-color:var(--accent); color:var(--accent);">학습 전략</span>
+        <h2 class="slide-title" style="font-size:clamp(2rem, 4.5vw, 3.2rem);">정답이 아니라 <span style="color:var(--accent);">풀이 흐름</span>을 손에 익히세요</h2>
+        <p class="slide-sub">숫자만 다른 동일 유형이 반복 출제됩니다. 서술형은 본인 사례·근거·결론 톤이 곧 평가 기준입니다.</p>
+        <div class="closing-list">
+          <div class="closing-item">
+            <div class="closing-mark">1</div>
+            <div class="closing-text"><strong>인적성 수리</strong> — 5문제 풀이 흐름을 손에 익혀 숫자만 바뀌어도 자동 대응 가능하게.</div>
+          </div>
+          <div class="closing-item">
+            <div class="closing-mark">2</div>
+            <div class="closing-text"><strong>게임 KPI 응용</strong> — 리텐션·가챠·ROI·DAU·기댓값 — 사업PM이 매일 보는 지표 감각.</div>
+          </div>
+          <div class="closing-item">
+            <div class="closing-mark">3</div>
+            <div class="closing-text"><strong>서술형 5문제</strong> — A4 1장 분량을 30분 안에 “관점 → 근거 → 결론” 구조로 완성하는 훈련.</div>
+          </div>
+          <div class="closing-item">
+            <div class="closing-mark">4</div>
+            <div class="closing-text"><strong>본인 사례 정리</strong> — 본인이 즐긴 게임 2~3개의 BM·이벤트·매출 흐름을 미리 분석해 두기.</div>
+          </div>
+          <div class="closing-item" style="grid-column:1/-1;">
+            <div class="closing-mark">5</div>
+            <div class="closing-text"><strong>지속 서치</strong> — 모바일인덱스 · 센서타워 · 게임백서 — 시장·지표 감각은 데이터로 길러집니다.</div>
+          </div>
+        </div>
+        <div class="closing-foot">
+          본 자료는 2025년까지 출제 유형 기반 신규 작성본 · 학습 가이드 목적<br>
+          Even-i 게임업계 취준 · 사업PM 부문 · 2026.05.21
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="deck-dots" id="deckDots"></div>
+  <div class="deck-nav" aria-live="polite">
+    <button id="deckPrev" aria-label="이전 슬라이드">‹</button>
+    <span class="deck-counter"><span id="deckCur">1</span><span class="total"> / 21</span></span>
+    <button id="deckNext" aria-label="다음 슬라이드">›</button>
+  </div>
+  <div class="deck-hint" aria-hidden="true"><kbd>←</kbd><kbd>→</kbd> 이동 · <kbd>Home</kbd>/<kbd>End</kbd> · <kbd>Space</kbd> 다음</div>
+
+  <div class="edit-toolbar" role="toolbar" aria-label="편집 도구">
+    <span class="edit-badge">편집 모드</span>
+    <button onclick="saveEdits()" class="btn-save">저장</button>
+    <button onclick="resetEdits()">원본 복원</button>
+    <button onclick="toggleEdit()">완료</button>
+  </div>
+
+  <script>
+    var currentTheme = 'light';
+    var editMode = false;
+    var EDIT_KEY = 'viz-edits-' + location.pathname;
+    var EDIT_SEL = 'h1,h2,h3,h4,h5,h6,p,li,td,th,.slide-sub,.q-title-text,.q-body,.q-sub,.step-text,.answer-value,.kpi-card .desc,.section-sub,.row-ttl,.row-desc,.vs-ttl,.vs-list li,.ph-ttl,.ph-body,.mk-head,.mk-body,.closing-text';
+    var EDIT_EX = 'button,a,script,style,.viz-menu,.edit-toolbar,.deck-nav,.deck-dots,.deck-hint,[data-no-edit],.no-edit';
+    window.slideNavEnabled = true;
+
+    function toggleMenu() {
+      var dd = document.getElementById('vizMenuDropdown');
+      if (dd) dd.classList.toggle('open');
+    }
+    var SUN_SVG = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+    var MOON_SVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      var icon = document.getElementById('themeIcon');
+      var label = document.getElementById('themeLabel');
+      if (icon) icon.innerHTML = t === 'dark' ? MOON_SVG : SUN_SVG;
+      if (label) label.textContent = t === 'dark' ? 'Dark' : 'Light';
+      try { localStorage.setItem('viz-theme', t); } catch(ex) {}
+      currentTheme = t;
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, { quality:1, pixelRatio:2,
+          filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { console.error('Download failed:', e); }
+      menu.style.display = '';
+    }
+
+    function getEditable() {
+      return Array.from(document.querySelectorAll(EDIT_SEL)).filter(function(el) {
+        return !el.closest(EDIT_EX);
+      });
+    }
+    function ensureEditKeys() {
+      var counts = {};
+      getEditable().forEach(function(el) {
+        if (el.dataset.editKey) return;
+        var path = [];
+        for (var n = el; n && n.nodeType === 1 && n !== document.body; n = n.parentElement) {
+          var seg = n.tagName.toLowerCase();
+          if (n.id) { seg += '#' + n.id; path.unshift(seg); break; }
+          if (n.className && typeof n.className === 'string') {
+            var cls = n.className.trim().split(/\s+/).slice(0, 2).join('.');
+            if (cls) seg += '.' + cls;
+          }
+          path.unshift(seg);
+        }
+        var base = path.join('>');
+        counts[base] = (counts[base] || 0) + 1;
+        el.dataset.editKey = base + ':' + counts[base];
+      });
+    }
+    function enableEdit() {
+      editMode = true; document.body.classList.add('edit-mode');
+      window.slideNavEnabled = false;
+      ensureEditKeys();
+      getEditable().forEach(function(el) { el.contentEditable = 'true'; });
+      var lbl = document.getElementById('editMenuLabel');
+      if (lbl) lbl.textContent = '편집 종료';
+    }
+    function disableEdit() {
+      editMode = false; document.body.classList.remove('edit-mode');
+      window.slideNavEnabled = true;
+      getEditable().forEach(function(el) { el.contentEditable = 'false'; });
+      var lbl = document.getElementById('editMenuLabel');
+      if (lbl) lbl.textContent = '편집 모드';
+    }
+    function toggleEdit() { if (editMode) disableEdit(); else enableEdit(); }
+    function saveEdits() {
+      ensureEditKeys();
+      var d = {};
+      getEditable().forEach(function(el) { d[el.dataset.editKey] = el.innerHTML; });
+      localStorage.setItem(EDIT_KEY, JSON.stringify(d));
+      var b = document.querySelector('.btn-save');
+      if (b) { b.textContent = '저장됨'; setTimeout(function() { b.textContent = '저장'; }, 1500); }
+    }
+    function resetEdits() {
+      if (!confirm('편집 내용을 초기화하고 원본으로 되돌릴까요?')) return;
+      localStorage.removeItem(EDIT_KEY); location.reload();
+    }
+    function loadEdits() {
+      var raw = localStorage.getItem(EDIT_KEY);
+      if (!raw) return;
+      try {
+        var d = JSON.parse(raw);
+        ensureEditKeys();
+        getEditable().forEach(function(el) {
+          var k = el.dataset.editKey;
+          if (d[k] != null) el.innerHTML = d[k];
+        });
+      } catch(e) {}
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.viz-menu')) {
+        var dd = document.getElementById('vizMenuDropdown');
+        if (dd) dd.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var dd = document.getElementById('vizMenuDropdown');
+        if (dd) dd.classList.remove('open');
+      }
+    });
+
+    try {
+      var _s = localStorage.getItem('viz-theme');
+      if (_s === 'light' || _s === 'dark') currentTheme = _s;
+    } catch(ex) {}
+    applyTheme(currentTheme);
+
+    document.addEventListener('DOMContentLoaded', loadEdits);
+
+    (function(){
+      var slides = document.querySelectorAll('.slide');
+      var total = slides.length;
+      var dotsBox = document.getElementById('deckDots');
+      var prev = document.getElementById('deckPrev');
+      var next = document.getElementById('deckNext');
+      var curEl = document.getElementById('deckCur');
+      if(!total || !dotsBox || !prev || !next || !curEl) return;
+      var current = 0;
+
+      var totalSpan = document.querySelector('.deck-counter .total');
+      if(totalSpan) totalSpan.textContent = ' / ' + total;
+
+      for(var i=0; i<total; i++){
+        (function(idx){
+          var d = document.createElement('button');
+          d.className = 'dot' + (idx===0?' active':'');
+          d.setAttribute('aria-label', '슬라이드 '+(idx+1));
+          d.addEventListener('click', function(){ goToSlide(idx); });
+          dotsBox.appendChild(d);
+        })(i);
+      }
+      var dots = dotsBox.querySelectorAll('.dot');
+
+      window.goToSlide = function(i){
+        if(i < 0 || i >= total || i === current) return;
+        slides[current].classList.remove('active');
+        slides[i].classList.add('active');
+        dots[current].classList.remove('active');
+        dots[i].classList.add('active');
+        current = i;
+        curEl.textContent = i+1;
+        prev.disabled = (i === 0);
+        next.disabled = (i === total-1);
+        window.scrollTo({top:0, behavior:'instant'});
+        history.replaceState(null, '', '#'+(i+1));
+      };
+      function step(d){ goToSlide(Math.max(0, Math.min(total-1, current+d))); }
+
+      prev.addEventListener('click', function(){ step(-1); });
+      next.addEventListener('click', function(){ step(1); });
+
+      document.addEventListener('keydown', function(e){
+        if(!window.slideNavEnabled) return;
+        if(e.target.matches('input,textarea,[contenteditable]')) return;
+        switch(e.key){
+          case 'ArrowRight': case 'PageDown': case ' ':
+            e.preventDefault(); step(1); break;
+          case 'ArrowLeft': case 'PageUp':
+            e.preventDefault(); step(-1); break;
+          case 'Home': e.preventDefault(); goToSlide(0); break;
+          case 'End': e.preventDefault(); goToSlide(total-1); break;
+        }
+      });
+
+      var tx = 0, ty = 0;
+      document.addEventListener('touchstart', function(e){
+        tx = e.changedTouches[0].screenX;
+        ty = e.changedTouches[0].screenY;
+      }, {passive:true});
+      document.addEventListener('touchend', function(e){
+        var dx = e.changedTouches[0].screenX - tx;
+        var dy = e.changedTouches[0].screenY - ty;
+        if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5){
+          step(dx < 0 ? 1 : -1);
+        }
+      }, {passive:true});
+
+      function fromHash(){
+        var h = parseInt((location.hash||'').replace('#',''), 10);
+        if(h >= 1 && h <= total) goToSlide(h-1);
+      }
+      fromHash();
+      if(current === 0) prev.disabled = true;
+      window.addEventListener('hashchange', fromHash);
+    })();
+  </script>
+</body>
+</html>
