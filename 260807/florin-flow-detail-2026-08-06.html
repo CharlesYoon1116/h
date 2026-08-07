@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang=ko><head><meta charset=utf-8>
+<title>플로린 일반 유통 상세 (2026-08-06) — 드라이런 미리보기</title>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#0b1220;--card:#111a2e;--line:#1e2942;--fg:#cfe0ff;--mut:#93a2c0;--pos:#4ade80;--neg:#f87171;--acc:#facc15}
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:var(--bg);color:var(--fg);font-family:'Noto Sans KR','Segoe UI',-apple-system,sans-serif;line-height:1.55}
+.wrap{max-width:1200px;margin:0 auto}
+h1{font-size:20px;margin:0 0 6px}
+h2{font-size:17px;margin:22px 0 10px;border-left:3px solid var(--acc);padding-left:10px}
+h3{font-size:14px;margin:14px 0 6px;color:var(--acc)}
+.meta{color:var(--mut);font-size:12px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:none}
+.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pos{color:var(--pos)}
+.neg{color:var(--neg)}
+.acc{color:var(--acc)}
+.mut{color:var(--mut);font-size:12px}
+.foot{color:var(--mut);font-size:12px;margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:0}
+details[open]{padding-bottom:8px}
+summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:14px;color:var(--acc);list-style:none;user-select:none;display:flex;align-items:center;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▸";transition:transform .15s;color:var(--mut);font-size:14px;margin-left:8px}
+details[open] summary::after{transform:rotate(90deg)}
+summary:hover{background:#152340}
+.detail-body{padding:0 14px 4px;font-size:13px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+.dryrun{display:inline-block;background:#facc15;color:#0b1220;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-left:8px}
+.axis-tbl th:first-child{width:14%}
+.axis-tbl th:not(:first-child):not(:last-child){width:16%}
+.small{font-size:12px}
+.tag{display:inline-block;padding:1px 6px;background:#1e2942;border-radius:3px;font-size:11px;color:var(--mut);margin-right:4px}
+.section-sep{border-top:1px dashed var(--line);margin:16px 0}
+</style></head>
+<body><div class=wrap>
+
+<h1>플로린 일반 유통 세부 분해 — 2026-08-06<span class=dryrun>DRYRUN 미리보기</span></h1>
+<div class=meta>대상 서버군: 하이퍼(46~55) · 글로벌(56~61) · 재화 TID 1100300011 · 산출 2026-08-07 · 정본은 florin_daily.db + fact_item_flow / bronze.log_daily_* 조인 실측</div>
+
+<!-- ============ 하이퍼 5축 분해 (기존 리포트 재현) ============ -->
+<h2>하이퍼 — 5축 분해</h2>
+<div class=card>
+<table class=axis-tbl>
+<tr><th>축</th><th class=r>획득</th><th class=r>사용</th><th class=r>순증감</th><th>비고</th></tr>
+<tr><td>① 일반 유통</td><td class=r>3,482.6억</td><td class=r>5,001.7억</td><td class="r neg">-1,519.0억</td><td class=mut>플레이 경제(항목화)</td></tr>
+<tr><td>② 사냥(추정)</td><td class=r>3,862.3억</td><td class=r>0</td><td class="r pos">+3,862.3억</td><td class=mut>원장에만 있는 획득</td></tr>
+<tr><td>③ 빠칭코 순환</td><td class=r>1.2조</td><td class=r>1.3조</td><td class="r neg">-967.7억</td><td class=mut>회수율 93%</td></tr>
+<tr><td>④ 거래소</td><td class=r>9,185.1억</td><td class=r>8,597.4억</td><td class="r pos">+587.8억</td><td class=mut>정산 시차 포함</td></tr>
+<tr><td>⑤ 우편·길드</td><td class=r>3,073.6억</td><td class=r>355.6억</td><td class="r pos">+2,718.0억</td><td class=mut></td></tr>
+<tr><td>＋ 패키지 개봉</td><td class=r>27.4억</td><td class=r>0</td><td class="r pos">+27.4억</td><td class=mut></td></tr>
+</table>
+<div style="margin-top:10px" class=small>
+<b>획득</b> 시스템 보상 +3,342.4억 (96%) · 다크 스톤 판매 +104.5억 (3%) · 기타 +35.7억 (1%)<br>
+<b>사용</b> 상점 일반 구매 -2,471.1억 (49%) · 강화·연마·분해 -1,857.0억 (37%) · 아이템 제작 -537.6억 (11%) · 기타 -96.8억 (2%) · 변신·인형 합성 -34.6억 (1%) · 사용처 불분명 -4.6억 (0%)
+</div>
+</div>
+
+<!-- ============ 신규 접기/펼치기 상세 (하이퍼) ============ -->
+<details open>
+<summary>▶ 하이퍼 ① 일반 유통 상세 분해 — 접기/펼치기</summary>
+<div class=detail-body>
+
+<h3>획득 세부 (+3,482.6억)</h3>
+
+<div class=card style="margin:8px 0">
+<b>시스템 보상</b> +3,342.4억 (96%) — log_type별 지급 창구
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>획득 (억)</th><th class=r>건수</th></tr>
+<tr><td>99</td><td>던전 결과 보상 <span class=tag>세부 아래</span></td><td class=r>867.6</td><td class=r>6,427</td></tr>
+<tr><td>266</td><td>길드 탑 일일 보상</td><td class=r>791.2</td><td class=r>283</td></tr>
+<tr><td>255</td><td>배치 보상 (일괄 지급)</td><td class=r>782.4</td><td class=r>1,709</td></tr>
+<tr><td>254</td><td>오프라인 전투 보상</td><td class=r>387.6</td><td class=r>176</td></tr>
+<tr><td>156</td><td>대전 랭킹 보상</td><td class=r>236.0</td><td class=r>391</td></tr>
+<tr><td>85</td><td>퀘스트 완료 보상</td><td class=r>190.6</td><td class=r>5,198</td></tr>
+<tr><td>252</td><td>칭호 일일 보상</td><td class=r>103.5</td><td class=r>335</td></tr>
+<tr><td>251·84·93·160·94·172</td><td>기타 (칭호승급·퀘수락·출석·PvP·패스·가챠)</td><td class=r>~1.5</td><td class=r>19</td></tr>
+</table>
+</div>
+
+<details>
+<summary>└ 던전 결과 보상 (lt=99) 던전별 세부 — 하이퍼 +867.6억</summary>
+<div class=detail-body>
+<table>
+<tr><th>dungeon_id</th><th>던전명</th><th>유형</th><th class=r>획득 (억)</th><th class=r>로그 건수</th></tr>
+<tr><td>909000</td><td>대지 정령탑</td><td>기본 던전</td><td class=r>236.2</td><td class=r>624</td></tr>
+<tr><td>907000</td><td>물 정령탑</td><td>기본 던전</td><td class=r>123.7</td><td class=r>561</td></tr>
+<tr><td>921000</td><td>악의 진격</td><td>웨이브 던전</td><td class=r>111.4</td><td class=r>579</td></tr>
+<tr><td>910000</td><td>불 정령탑</td><td>기본 던전</td><td class=r>69.5</td><td class=r>646</td></tr>
+<tr><td>908000</td><td>바람 정령탑</td><td>기본 던전</td><td class=r>67.3</td><td class=r>618</td></tr>
+<tr><td>904000</td><td>트리시움 던전</td><td>기본 던전</td><td class=r>57.7</td><td class=r>621</td></tr>
+<tr><td>901000</td><td>락시움 던전</td><td>기본 던전</td><td class=r>56.0</td><td class=r>720</td></tr>
+<tr><td>906000</td><td>모르모트의 길</td><td>기본 던전</td><td class=r>53.5</td><td class=r>639</td></tr>
+<tr><td>905000</td><td>헬렌의 길</td><td>기본 던전</td><td class=r>41.4</td><td class=r>619</td></tr>
+<tr><td>903000</td><td>파이썬의 영역</td><td>보스 단계 던전</td><td class=r>38.5</td><td class=r>571</td></tr>
+<tr><td>902000</td><td>미궁의 발트탑</td><td>무한 던전</td><td class=r>6.5</td><td class=r>135</td></tr>
+<tr><td>911000</td><td>미궁의 아우터리탑</td><td>무한 던전</td><td class=r>5.8</td><td class=r>94</td></tr>
+</table>
+<div class=mut style="margin-top:6px">※ 정령탑 4종(909·907·910·908)이 하이퍼 던전 보상의 57%를 차지. 무한 던전(발트탑·아우터리탑)은 미미(12억).</div>
+</div>
+</details>
+
+<div class=card style="margin:8px 0">
+<b>다크 스톤 판매</b> +104.5억 (3%)
+<div class=mut style="margin-top:4px">lt=87 매입상점 판매 환금 총 12,295.5억 중, 같은 tx에 <b>다크 스톤(1100500261)</b>이 포함된 몫만 SVN 단가 안분 후 잔여 = 104.5억. 나머지 12,191억은 <b>주문서 환금</b>이라 ③ 빠칭코 회수축으로 분리됨.</div>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>기타</b> +35.7억 (1%) — <b>필드 보스 특수 드랍 (lt=164)</b>
+<table style="margin-top:6px">
+<tr><th>몬스터 TID</th><th>이름</th><th>등급</th><th class=r>획득 (억)</th><th class=r>드랍</th></tr>
+<tr><td>807199</td><td>그림자: 고대 골렘 칸토</td><td class=acc>4</td><td class=r>12.0</td><td class=r>40</td></tr>
+<tr><td>805199</td><td>그림자: 악마의 도구 루다베르</td><td class=acc>4</td><td class=r>10.2</td><td class=r>34</td></tr>
+<tr><td>810198</td><td>철혈의 사브녹 환영</td><td class=acc>4</td><td class=r>9.0</td><td class=r>30</td></tr>
+<tr><td>806199</td><td>그림자: 달궈진 뿔의 발러</td><td class=acc>4</td><td class=r>9.0</td><td class=r>30</td></tr>
+<tr><td>808199</td><td>그림자: 거대 토드 킹 투른</td><td class=acc>4</td><td class=r>7.8</td><td class=r>26</td></tr>
+<tr><td>811198</td><td>지진 발걸음 바르샨 환영</td><td class=acc>4</td><td class=r>6.6</td><td class=r>22</td></tr>
+<tr><td>809198</td><td>싸이클롭스 군단장 카트라마</td><td class=acc>4</td><td class=r>5.4</td><td class=r>18</td></tr>
+<tr><td>803199</td><td>그림자: 스콜피온 킹 코르피</td><td class=acc>4</td><td class=r>5.4</td><td class=r>18</td></tr>
+<tr><td>804199</td><td>그림자: 피에 굶주린 버그베어 탕카르</td><td class=acc>4</td><td class=r>3.6</td><td class=r>12</td></tr>
+<tr><td>802199</td><td>그림자: 적안의 메두사 환영</td><td class=acc>4</td><td class=r>3.3</td><td class=r>11</td></tr>
+</table>
+<div class=mut style="margin-top:6px">※ 전부 KillMonsterGrade=4(필드 보스). 드랍당 균일 3,000만 플로린 = SVN 확률 테이블상 고정 금액.</div>
+</div>
+
+<h3>사용 세부 (-5,001.7억)</h3>
+
+<div class=card style="margin:8px 0">
+<b>상점 일반 구매</b> -2,471.1억 (49%) — <b>빠칭코 tx(도안·수집상자) 제외한 순수 상점 구매</b>
+</div>
+
+<details>
+<summary>└ 상점 구매 아이템별 세부 — 하이퍼 -2,471억</summary>
+<div class=detail-body>
+<table>
+<tr><th>item_id</th><th>아이템명</th><th>등급</th><th class=r>지출 (억)</th><th class=r>구매 개수</th><th class=r>tx 라인</th></tr>
+<tr><td>1300100071</td><td>변신 100회 소환권 (귀속)</td><td>1</td><td class=r>741.0</td><td class=r>741</td><td class=r>741</td></tr>
+<tr><td>1300200071</td><td>마법인형 100회 소환권 (귀속)</td><td>1</td><td class=r>553.0</td><td class=r>553</td><td class=r>553</td></tr>
+<tr><td>1160000041</td><td>성서 에오스 (귀속)</td><td class=acc>6</td><td class=r>248.0</td><td class=r>2,457</td><td class=r>101</td></tr>
+<tr><td>1100500211</td><td>용의 마력 결정 (귀속)</td><td>1</td><td class=r>106.0</td><td class=r>1,060,000</td><td class=r>107</td></tr>
+<tr><td>1100500221</td><td>찬란한 빛의 결정 (귀속)</td><td>1</td><td class=r>100.0</td><td class=r>1,000,000</td><td class=r>102</td></tr>
+<tr><td>1140011021</td><td>불완전한 넥타르 (귀속)</td><td class=acc>5</td><td class=r>90.0</td><td class=r>900</td><td class=r>3</td></tr>
+<tr><td>1170316011</td><td>망자의 묘지 모래시계 (귀속) 1시간</td><td>1</td><td class=r>23.1</td><td class=r>461</td><td class=r>232</td></tr>
+<tr><td>1300181091</td><td>에오스의 마법인형 픽업 소환권 (귀속)</td><td>1</td><td class=r>12.0</td><td class=r>1,004</td><td class=r>2</td></tr>
+<tr><td>1230100011</td><td>아스몬의 저주 (귀속)</td><td>1</td><td class=r>7.5</td><td class=r>2,499</td><td class=r>8</td></tr>
+<tr><td>1300200051</td><td>마법인형 10회 소환권 (귀속)</td><td>1</td><td class=r>4.3</td><td class=r>43</td><td class=r>43</td></tr>
+<tr><td>1300180111</td><td>디오네의 변신 픽업 소환권 (귀속)</td><td>1</td><td class=r>3.6</td><td class=r>301</td><td class=r>1</td></tr>
+<tr><td>1300200061</td><td>마법인형 30회 소환권 (귀속)</td><td>1</td><td class=r>3.0</td><td class=r>10</td><td class=r>10</td></tr>
+<tr><td>1170301001~1170310001</td><td>던전 이용권 10종 (락시움·헬렌·파이썬·트리시움·모르모트·정령탑 4종·악의진격)</td><td>1</td><td class=r>~24</td><td class=r>248씩</td><td class=r>248씩</td></tr>
+<tr><td>1123110011</td><td>문장 파편 (귀속)</td><td>1</td><td class=r>2.5</td><td class=r>123,500,000</td><td class=r>247</td></tr>
+<tr><td>1120110011</td><td>유물 강화석 (귀속)</td><td>1</td><td class=r>2.5</td><td class=r>61,250</td><td class=r>245</td></tr>
+<tr><td>1121100011</td><td>유물 제련석 (귀속)</td><td>1</td><td class=r>2.4</td><td class=r>5,950,000</td><td class=r>238</td></tr>
+<tr><td>1312100381</td><td>미궁의 문장 상자 (귀속)</td><td>2</td><td class=r>2.4</td><td class=r>120,000</td><td class=r>240</td></tr>
+<tr><td>1313145741</td><td>미궁의 유물 상자 (귀속)</td><td>2</td><td class=r>2.4</td><td class=r>59,000</td><td class=r>236</td></tr>
+<tr><td>1800500011</td><td>캐릭터명 변경권 (귀속)</td><td>1</td><td class=r>1.5</td><td class=r>3</td><td class=r>3</td></tr>
+<tr><td colspan=3 class=mut>그 외 소액 (마법인형 30회/10회 소환권·주문서·물약·문장 파편 등)</td><td class=r>~1.4</td><td class=r></td><td class=r></td></tr>
+</table>
+<div class=mut style="margin-top:6px">※ 상위 2위 <b>변신·마법인형 100연차 소환권</b>이 합쳐 1,294억 (52%). 하이퍼는 <b>가챠(결정형 확률) 재화</b>에 지출 몰빵.</div>
+</div>
+</details>
+
+<div class=card style="margin:8px 0">
+<b>강화·연마·분해</b> -1,857.0억 (37%)
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>사용 (억)</th><th class=r>건수</th></tr>
+<tr><td>283</td><td>주얼 연마</td><td class=r>940.7</td><td class=r>11,485</td></tr>
+<tr><td>18</td><td>장비 강화</td><td class=r>502.2</td><td class=r>125,905</td></tr>
+<tr><td>35</td><td>룬 강화</td><td class=r>327.8</td><td class=r>13,669</td></tr>
+<tr><td>29</td><td>문장 강화</td><td class=r>46.7</td><td class=r>3,764</td></tr>
+<tr><td>12</td><td>스택 아이템 분해</td><td class=r>29.6</td><td class=r>2,176</td></tr>
+<tr><td>25</td><td>장신구 슬롯 강화</td><td class=r>5.2</td><td class=r>1,214</td></tr>
+<tr><td>26</td><td>장신구 제련</td><td class=r>4.3</td><td class=r>693</td></tr>
+<tr><td>327</td><td>아이템 승급</td><td class=r>3.4</td><td class=r>10</td></tr>
+<tr><td>262·324·19·20</td><td>기타 (장비축복·변환·분해·속성강화)</td><td class=r>~1.1</td><td class=r>4,261</td></tr>
+</table>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>아이템 제작</b> -537.6억 (11%) — lt=13 <span class=mut>단일 로그, 제작 레시피 재료 소진</span>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>기타</b> -96.8억 (2%)
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>사용 (억)</th><th class=r>건수</th></tr>
+<tr><td>183</td><td>신의전당 성유물 초기화</td><td class=r>94.1</td><td class=r>69</td></tr>
+<tr><td>54</td><td>텔레포트</td><td class=r>2.6</td><td class=r>538</td></tr>
+<tr><td>80·58·92·84·93 등</td><td>창고 꺼내기·장비 복구·길드 쪽지 등</td><td class=r>~0.1</td><td class=r>2,193</td></tr>
+</table>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>변신·인형 합성</b> -34.6억 (1%)
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>사용 (억)</th><th class=r>건수</th></tr>
+<tr><td>260</td><td>인형 교체</td><td class=r>16.7</td><td class=r>33</td></tr>
+<tr><td>257</td><td>변신 교체</td><td class=r>15.3</td><td class=r>26</td></tr>
+<tr><td>256</td><td>변신 합성</td><td class=r>1.6</td><td class=r>40,739</td></tr>
+<tr><td>259</td><td>인형 합성</td><td class=r>1.1</td><td class=r>28,439</td></tr>
+</table>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>사용처 불분명</b> -4.6억 (0%) <span class=mut>= money_flow 사용 − fact_item_flow 사용 잔차 (원장 미기록분, 데이터 품질 지표)</span>
+</div>
+
+</div>
+</details>
+
+<div class=section-sep></div>
+
+<!-- ============ 신규 접기/펼치기 상세 (글로벌) ============ -->
+<details open>
+<summary>▶ 글로벌 ① 일반 유통 상세 분해 — 접기/펼치기</summary>
+<div class=detail-body>
+
+<h3>획득 세부 (+7,056.0억)</h3>
+
+<div class=card style="margin:8px 0">
+<b>시스템 보상</b> +6,852.8억 (97%) — log_type별 지급 창구
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>획득 (억)</th><th class=r>건수</th></tr>
+<tr><td>99</td><td>던전 결과 보상 <span class=tag>세부 아래</span></td><td class=r>1,898.8</td><td class=r>32,837</td></tr>
+<tr><td>266</td><td>길드 탑 일일 보상</td><td class=r>1,778.3</td><td class=r>832</td></tr>
+<tr><td>85</td><td>퀘스트 완료 보상</td><td class=r>1,236.2</td><td class=r>33,308</td></tr>
+<tr><td>255</td><td>배치 보상 (일괄 지급)</td><td class=r>1,087.2</td><td class=r>8,144</td></tr>
+<tr><td>156</td><td>대전 랭킹 보상</td><td class=r>547.3</td><td class=r>1,491</td></tr>
+<tr><td>254</td><td>오프라인 전투 보상</td><td class=r>339.7</td><td class=r>589</td></tr>
+<tr><td>252</td><td>칭호 일일 보상</td><td class=r>322.9</td><td class=r>1,573</td></tr>
+<tr><td>251</td><td>칭호 승급</td><td class=r>15.4</td><td class=r>136</td></tr>
+<tr><td>160</td><td>PvP 승리 보상</td><td class=r>7.2</td><td class=r>6</td></tr>
+<tr><td>84·93</td><td>기타 (퀘 수락·출석)</td><td class=r>~0.1</td><td class=r>32</td></tr>
+</table>
+</div>
+
+<details>
+<summary>└ 던전 결과 보상 (lt=99) 던전별 세부 — 글로벌 +1,898.8억</summary>
+<div class=detail-body>
+<table>
+<tr><th>dungeon_id</th><th>던전명</th><th>유형</th><th class=r>획득 (억)</th><th class=r>로그 건수</th></tr>
+<tr><td>909000</td><td>대지 정령탑</td><td>기본 던전</td><td class=r>307.6</td><td class=r>2,446</td></tr>
+<tr><td>921000</td><td>악의 진격</td><td>웨이브 던전</td><td class=r>213.0</td><td class=r>1,861</td></tr>
+<tr><td>907000</td><td>물 정령탑</td><td>기본 던전</td><td class=r>202.9</td><td class=r>2,259</td></tr>
+<tr><td>910000</td><td>불 정령탑</td><td>기본 던전</td><td class=r>156.7</td><td class=r>2,338</td></tr>
+<tr><td>901000</td><td>락시움 던전</td><td>기본 던전</td><td class=r>153.3</td><td class=r>5,028</td></tr>
+<tr><td>906000</td><td>모르모트의 길</td><td>기본 던전</td><td class=r>143.5</td><td class=r>4,284</td></tr>
+<tr><td>903000</td><td>파이썬의 영역</td><td>보스 단계 던전</td><td class=r>138.3</td><td class=r>1,816</td></tr>
+<tr><td>908000</td><td>바람 정령탑</td><td>기본 던전</td><td class=r>136.7</td><td class=r>2,185</td></tr>
+<tr><td>904000</td><td>트리시움 던전</td><td>기본 던전</td><td class=r>136.4</td><td class=r>3,601</td></tr>
+<tr><td>905000</td><td>헬렌의 길</td><td>기본 던전</td><td class=r>132.2</td><td class=r>3,573</td></tr>
+<tr><td>902000</td><td>미궁의 발트탑</td><td>무한 던전</td><td class=r>102.2</td><td class=r>2,117</td></tr>
+<tr><td>911000</td><td>미궁의 아우터리탑</td><td>무한 던전</td><td class=r>75.9</td><td class=r>1,329</td></tr>
+</table>
+<div class=mut style="margin-top:6px">※ 대지 정령탑 1위(16%). 하이퍼와 달리 무한 던전(178억) 소비가 활발.</div>
+</div>
+</details>
+
+<div class=card style="margin:8px 0">
+<b>다크 스톤 판매</b> +177.9억 (3%)
+<div class=mut style="margin-top:4px">lt=87 매입상점 판매 환금 총 5,578.8억 중, 다크 스톤 tx 몫만 잔여 = 178억. 나머지 5,401억은 주문서 환금 → ③ 빠칭코 회수축.</div>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>기타</b> +25.3억 (0%) — <b>필드 보스 특수 드랍 (lt=164)</b>
+<table style="margin-top:6px">
+<tr><th>몬스터 TID</th><th>이름</th><th>등급</th><th class=r>획득 (억)</th><th class=r>드랍</th></tr>
+<tr><td>804199</td><td>그림자: 피에 굶주린 버그베어 탕카르</td><td class=acc>4</td><td class=r>10.8</td><td class=r>36</td></tr>
+<tr><td>807199</td><td>그림자: 고대 골렘 칸토</td><td class=acc>4</td><td class=r>10.2</td><td class=r>34</td></tr>
+<tr><td>805199</td><td>그림자: 악마의 도구 루다베르</td><td class=acc>4</td><td class=r>8.4</td><td class=r>28</td></tr>
+<tr><td>806199</td><td>그림자: 달궈진 뿔의 발러</td><td class=acc>4</td><td class=r>6.6</td><td class=r>22</td></tr>
+<tr><td>808199</td><td>그림자: 거대 토드 킹 투른</td><td class=acc>4</td><td class=r>3.6</td><td class=r>12</td></tr>
+<tr><td>803199</td><td>그림자: 스콜피온 킹 코르피</td><td class=acc>4</td><td class=r>3.6</td><td class=r>12</td></tr>
+<tr><td>802199</td><td>그림자: 적안의 메두사 환영</td><td class=acc>4</td><td class=r>3.0</td><td class=r>10</td></tr>
+<tr><td>810198</td><td>철혈의 사브녹 환영</td><td class=acc>4</td><td class=r>2.4</td><td class=r>8</td></tr>
+<tr><td>809198</td><td>싸이클롭스 군단장 카트라마</td><td class=acc>4</td><td class=r>1.8</td><td class=r>6</td></tr>
+</table>
+<div class=mut style="margin-top:6px">※ 드랍당 균일 3,000만 플로린 (SVN 확률 테이블 고정 금액). 하이퍼(219 드랍) 대비 드랍 수 168회로 77% 수준.</div>
+</div>
+
+<h3>사용 세부 (-9,228.2억)</h3>
+
+<div class=card style="margin:8px 0">
+<b>상점 일반 구매</b> -3,726.0억 (40%) — <b>빠칭코 tx 제외한 순수 상점 구매</b>
+</div>
+
+<details>
+<summary>└ 상점 구매 아이템별 세부 — 글로벌 -3,726억</summary>
+<div class=detail-body>
+<table>
+<tr><th>item_id</th><th>아이템명</th><th>등급</th><th class=r>지출 (억)</th><th class=r>구매 개수</th><th class=r>tx 라인</th></tr>
+<tr><td>1300100071</td><td>변신 100회 소환권 (귀속)</td><td>1</td><td class=r>935.0</td><td class=r>935</td><td class=r>935</td></tr>
+<tr><td>1160000041</td><td>성서 에오스 (귀속)</td><td class=acc>6</td><td class=r>502.6</td><td class=r>4,569</td><td class=r>2,637</td></tr>
+<tr><td>1300200071</td><td>마법인형 100회 소환권 (귀속)</td><td>1</td><td class=r>261.0</td><td class=r>261</td><td class=r>261</td></tr>
+<tr><td>1140011021</td><td>불완전한 넥타르 (귀속)</td><td class=acc>5</td><td class=r>160.0</td><td class=r>1,600</td><td class=r>16</td></tr>
+<tr><td>1170315011</td><td>루멘탑 모래시계 (귀속) 1시간</td><td>1</td><td class=r>159.4</td><td class=r>3,188</td><td class=r>290</td></tr>
+<tr><td>1170314011</td><td>나드카스 탑 모래시계 (귀속) 1시간</td><td>1</td><td class=r>99.4</td><td class=r>1,987</td><td class=r>202</td></tr>
+<tr><td>1170316011</td><td>망자의 묘지 모래시계 (귀속) 1시간</td><td>1</td><td class=r>97.9</td><td class=r>1,958</td><td class=r>661</td></tr>
+<tr><td>1100500221</td><td>찬란한 빛의 결정 (귀속)</td><td>1</td><td class=r>81.5</td><td class=r>815,000</td><td class=r>83</td></tr>
+<tr><td>1100500211</td><td>용의 마력 결정 (귀속)</td><td>1</td><td class=r>77.0</td><td class=r>770,000</td><td class=r>78</td></tr>
+<tr><td>1170313011</td><td>니알라의 비밀금고 모래시계 (귀속) 1시간</td><td>1</td><td class=r>26.1</td><td class=r>521</td><td class=r>74</td></tr>
+<tr><td>1170301001</td><td>락시움 성전 이용권 (귀속)</td><td>1</td><td class=r>21.4</td><td class=r>2,140</td><td class=r>715</td></tr>
+<tr><td>1170302001</td><td>헬렌 안식처 이용권 (귀속)</td><td>1</td><td class=r>21.4</td><td class=r>2,136</td><td class=r>712</td></tr>
+<tr><td>1170305001</td><td>모르모트 안식처 이용권 (귀속)</td><td>1</td><td class=r>21.2</td><td class=r>2,115</td><td class=r>705</td></tr>
+<tr><td>1170306001</td><td>트리시움 성전 이용권 (귀속)</td><td>1</td><td class=r>21.1</td><td class=r>2,106</td><td class=r>702</td></tr>
+<tr><td>1170310001</td><td>불 정령탑 이용권 (귀속)</td><td>1</td><td class=r>20.7</td><td class=r>2,067</td><td class=r>689</td></tr>
+<tr><td>1170308001</td><td>바람 정령탑 이용권 (귀속)</td><td>1</td><td class=r>20.6</td><td class=r>2,058</td><td class=r>687</td></tr>
+<tr><td>1170307001</td><td>물 정령탑 이용권 (귀속)</td><td>1</td><td class=r>20.3</td><td class=r>2,034</td><td class=r>679</td></tr>
+<tr><td>1170303001</td><td>파이썬의 요람 이용권 (귀속)</td><td>1</td><td class=r>20.2</td><td class=r>2,022</td><td class=r>674</td></tr>
+<tr><td>1170309001</td><td>대지 정령탑 이용권 (귀속)</td><td>1</td><td class=r>20.0</td><td class=r>2,001</td><td class=r>667</td></tr>
+<tr><td>1170321001</td><td>악의 진격 이용권 (귀속)</td><td>1</td><td class=r>19.6</td><td class=r>1,956</td><td class=r>652</td></tr>
+<tr><td>1123110011</td><td>문장 파편 (귀속)</td><td>1</td><td class=r>18.8</td><td class=r>942,000,000</td><td class=r>628</td></tr>
+<tr><td>1120110011</td><td>유물 강화석 (귀속)</td><td>1</td><td class=r>18.3</td><td class=r>916,500</td><td class=r>611</td></tr>
+<tr><td>1121100011</td><td>유물 제련석 (귀속)</td><td>1</td><td class=r>17.7</td><td class=r>44,325,000</td><td class=r>591</td></tr>
+<tr><td>1312100381</td><td>미궁의 문장 상자 (귀속)</td><td>2</td><td class=r>17.3</td><td class=r>862,500</td><td class=r>575</td></tr>
+<tr><td>1313145741</td><td>미궁의 유물 상자 (귀속)</td><td>2</td><td class=r>17.2</td><td class=r>858,000</td><td class=r>572</td></tr>
+<tr><td>1230100011</td><td>아스몬의 저주 (귀속)</td><td>1</td><td class=r>13.0</td><td class=r>4,336</td><td class=r>22</td></tr>
+<tr><td>1300200061</td><td>마법인형 30회 소환권 (귀속)</td><td>1</td><td class=r>9.6</td><td class=r>32</td><td class=r>32</td></tr>
+<tr><td>1300100061</td><td>변신 30회 소환권 (귀속)</td><td>1</td><td class=r>9.0</td><td class=r>30</td><td class=r>30</td></tr>
+<tr><td>1220100011</td><td>체력 회복제 (귀속)</td><td>1</td><td class=r>8.6</td><td class=r>4,284,056</td><td class=r>2,396</td></tr>
+<tr><td>1800500011</td><td>캐릭터명 변경권 (귀속)</td><td>1</td><td class=r>7.0</td><td class=r>14</td><td class=r>14</td></tr>
+<tr><td>1300200051</td><td>마법인형 10회 소환권 (귀속)</td><td>1</td><td class=r>5.6</td><td class=r>56</td><td class=r>56</td></tr>
+<tr><td>1300100051</td><td>변신 10회 소환권 (귀속)</td><td>1</td><td class=r>3.3</td><td class=r>33</td><td class=r>33</td></tr>
+<tr><td>1230100111</td><td>속도의 물약 (귀속)</td><td>1</td><td class=r>0.8</td><td class=r>82,301</td><td class=r>1,935</td></tr>
+<tr><td colspan=3 class=mut>그 외 소액 (귀환 주문서·순간이동·마법인형 1회 소환권 등)</td><td class=r>~0.6</td><td class=r></td><td class=r></td></tr>
+</table>
+<div class=mut style="margin-top:6px">※ 글로벌 특징: 성서 에오스(503억)·<b>모래시계 4종(383억)</b>·<b>던전 이용권 10종(207억)</b> 등 던전 반복 콘텐츠·강화 재료에 지출이 넓게 분산.</div>
+</div>
+</details>
+
+<div class=card style="margin:8px 0">
+<b>강화·연마·분해</b> -2,312.4억 (25%)
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>사용 (억)</th><th class=r>건수</th></tr>
+<tr><td>18</td><td>장비 강화</td><td class=r>841.3</td><td class=r>461,481</td></tr>
+<tr><td>283</td><td>주얼 연마</td><td class=r>629.1</td><td class=r>13,710</td></tr>
+<tr><td>35</td><td>룬 강화</td><td class=r>494.8</td><td class=r>25,235</td></tr>
+<tr><td>29</td><td>문장 강화</td><td class=r>95.0</td><td class=r>12,920</td></tr>
+<tr><td>12</td><td>스택 아이템 분해</td><td class=r>82.4</td><td class=r>9,860</td></tr>
+<tr><td>25</td><td>장신구 슬롯 강화</td><td class=r>79.6</td><td class=r>5,826</td></tr>
+<tr><td>327</td><td>아이템 승급</td><td class=r>61.8</td><td class=r>128</td></tr>
+<tr><td>26</td><td>장신구 제련</td><td class=r>13.7</td><td class=r>14,486</td></tr>
+<tr><td>20</td><td>장비 속성 강화</td><td class=r>12.0</td><td class=r>4,556</td></tr>
+<tr><td>262</td><td>장비 축복 부여</td><td class=r>8.7</td><td class=r>1,768</td></tr>
+<tr><td>19</td><td>장비/장신구/문장/룬 분해</td><td class=r>2.8</td><td class=r>47,481</td></tr>
+<tr><td>324</td><td>장비 변환</td><td class=r>2.5</td><td class=r>38</td></tr>
+</table>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>아이템 제작</b> -2,269.0억 (25%) — lt=13 <span class=mut>단일 로그. 제작 볼륨 자체가 크며 하이퍼(538억)의 4.2배</span>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>변신·인형 합성</b> -491.4억 (5%)
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>사용 (억)</th><th class=r>건수</th></tr>
+<tr><td>257</td><td>변신 교체</td><td class=r>422.8</td><td class=r>1,321</td></tr>
+<tr><td>260</td><td>인형 교체</td><td class=r>62.8</td><td class=r>182</td></tr>
+<tr><td>256</td><td>변신 합성</td><td class=r>5.3</td><td class=r>117,507</td></tr>
+<tr><td>259</td><td>인형 합성</td><td class=r>3.1</td><td class=r>69,313</td></tr>
+</table>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>기타</b> -252.8억 (3%)
+<table style="margin-top:6px">
+<tr><th>lt</th><th>행위</th><th class=r>사용 (억)</th><th class=r>건수</th></tr>
+<tr><td>183</td><td>신의전당 성유물 초기화</td><td class=r>176.6</td><td class=r>215</td></tr>
+<tr><td>49</td><td>인벤 슬롯 확장</td><td class=r>44.7</td><td class=r>79</td></tr>
+<tr><td>54</td><td>텔레포트</td><td class=r>16.7</td><td class=r>4,162</td></tr>
+<tr><td>52</td><td>룬인벤 슬롯 확장</td><td class=r>12.3</td><td class=r>13</td></tr>
+<tr><td>81</td><td>창고 슬롯 오픈</td><td class=r>10.7</td><td class=r>25</td></tr>
+<tr><td>58·80·59·89·84·92 등</td><td>기타 (장비복구·창고·경험치복구 등)</td><td class=r>~0.4</td><td class=r>2,140</td></tr>
+</table>
+</div>
+
+<div class=card style="margin:8px 0">
+<b>사용처 불분명</b> -176.6억 (2%) <span class=mut>= money_flow 사용 − fact_item_flow 사용 잔차 (원장 미기록분, 데이터 품질 지표). 하이퍼(4.6억)의 38배 — 글로벌 로그 커버리지 결손이 상대적으로 큼.</span>
+</div>
+
+</div>
+</details>
+
+<div class=section-sep></div>
+
+<!-- ============ 글로벌 5축 분해 (기존 리포트 재현) ============ -->
+<h2>글로벌 — 5축 분해</h2>
+<div class=card>
+<table class=axis-tbl>
+<tr><th>축</th><th class=r>획득</th><th class=r>사용</th><th class=r>순증감</th><th>비고</th></tr>
+<tr><td>① 일반 유통</td><td class=r>7,056.0억</td><td class=r>9,228.2억</td><td class="r neg">-2,172.3억</td><td class=mut>플레이 경제(항목화)</td></tr>
+<tr><td>② 사냥(추정)</td><td class=r>4,284.4억</td><td class=r>0</td><td class="r pos">+4,284.4억</td><td class=mut>원장에만 있는 획득</td></tr>
+<tr><td>③ 빠칭코 순환</td><td class=r>5,400.1억</td><td class=r>6,078.8억</td><td class="r neg">-678.7억</td><td class=mut>회수율 89%</td></tr>
+<tr><td>④ 거래소</td><td class=r>7,504.9억</td><td class=r>6,970.4억</td><td class="r pos">+534.6억</td><td class=mut>정산 시차 포함</td></tr>
+<tr><td>⑤ 우편·길드</td><td class=r>932.6억</td><td class=r>715.3억</td><td class="r pos">+217.3억</td><td class=mut></td></tr>
+<tr><td>＋ 패키지 개봉</td><td class=r>49.4억</td><td class=r>0</td><td class="r pos">+49.4억</td><td class=mut></td></tr>
+</table>
+<div style="margin-top:10px" class=small>
+<b>획득</b> 시스템 보상 +6,852.8억 (97%) · 다크 스톤 판매 +177.9억 (3%) · 기타 +25.3억 (0%)<br>
+<b>사용</b> 상점 일반 구매 -3,726.0억 (40%) · 강화·연마·분해 -2,312.4억 (25%) · 아이템 제작 -2,269.0억 (25%) · 변신·인형 합성 -491.4억 (5%) · 기타 -252.8억 (3%) · 사용처 불분명 -176.6억 (2%)
+</div>
+</div>
+
+<div class=foot>
+※ 이 페이지는 <b>기존 일일 리포트에 삽입할 상세 섹션의 미리보기(dryrun)</b>입니다. 프로덕션 스킬(florin-flow-html) 반영 여부는 별도 결정. 위 두 서버군 사이의 <b>접기/펼치기 블록 2개</b>가 추가 대상입니다.<br>
+※ 데이터는 florin_daily.db(flow_axis_daily·flows_daily 2026-08-06 파티션) + fact_item_flow / bronze.log_daily_dungeon / log_daily_monster_drop / log_daily_shop 실측 조인. 이름은 dict.stage_dungeon · dim_monster · dim_item 매핑.<br>
+※ 상점 구매 지출은 한 tx의 플로린 지출을 peer 아이템 수로 균등 배분한 값(정확한 아이템별 단가는 SVN 상점 테이블에 있으나 이 미리보기는 안분 근사). 실 반영 시 SVN 단가로 정확 배분 권장.<br>
+※ 사내 기밀 — 유통 수치는 대외 공유 금지.
+</div>
+
+</div></body></html>
