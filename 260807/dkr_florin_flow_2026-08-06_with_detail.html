@@ -40,10 +40,12 @@ details.inline > summary::-webkit-details-marker{display:none}
 details.inline > summary::after{content:" ▼";color:#f0c02d;font-size:10px;margin-left:4px;transition:transform .15s;display:inline-block}
 details.inline[open] > summary::after{transform:rotate(180deg)}
 details.inline > summary:hover{color:#f0c02d}
-details.inline > .nested{margin-top:10px;padding:10px 12px;background:#0f1420;border:1px dashed var(--line);border-radius:6px}
-details.inline > .nested table th{font-size:11px}
-details.inline > .nested table td{padding:4px 6px;font-size:12px}
+details.inline > .nested{margin-top:10px;padding:10px 12px;background:#0f1420;border:1px dashed var(--line);border-radius:6px;overflow-x:auto}
+details.inline > .nested table{width:auto;min-width:100%}
+details.inline > .nested table th{font-size:11px;white-space:nowrap}
+details.inline > .nested table td{padding:4px 6px;font-size:12px;white-space:nowrap}
 details.inline > .nested details.inline > .nested{background:#070a12}
+details.inline > .nested .sub-block{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
 .hint{color:#f0c02d;font-size:10px;margin-left:4px;font-weight:600}
 .acc{color:#f0c02d}
 </style></head><body><div class=wrap>
@@ -87,7 +89,17 @@ details.inline > .nested details.inline > .nested{background:#070a12}
 <b>시스템 보상 lt별 — 하이퍼 (총 +3,342.4억)</b>
 <table style="margin-top:6px">
 <tr><th style="width:6%">lt</th><th>행위</th><th class=r style="width:15%">획득 (억)</th><th class=r style="width:12%">건수</th></tr>
-<tr><td>99</td><td><details class=inline><summary>던전 결과 보상<span class=hint>(누르면 던전별 세부)</span></summary><div class=nested>
+<tr><td>99</td><td>던전 결과 보상 <span class=n>(아래 던전별 세부 별도 확장)</span></td><td class=r>867.6</td><td class=r>6,427</td></tr>
+<tr><td>266</td><td>길드 탑 일일 보상</td><td class=r>791.2</td><td class=r>283</td></tr>
+<tr><td>255</td><td>배치 보상 (일괄 지급)</td><td class=r>782.4</td><td class=r>1,709</td></tr>
+<tr><td>254</td><td>오프라인 전투 보상</td><td class=r>387.6</td><td class=r>176</td></tr>
+<tr><td>156</td><td>대전 랭킹 보상</td><td class=r>236.0</td><td class=r>391</td></tr>
+<tr><td>85</td><td>퀘스트 완료 보상</td><td class=r>190.6</td><td class=r>5,198</td></tr>
+<tr><td>252</td><td>칭호 일일 보상</td><td class=r>103.5</td><td class=r>335</td></tr>
+<tr><td>251·84·93·160·94·172</td><td>기타 (칭호승급·퀘수락·출석·PvP·패스·가챠)</td><td class=r>~1.5</td><td class=r>19</td></tr>
+</table>
+<div class=sub-block>
+<details class=inline><summary>└ 던전 결과 보상 (lt=99) 던전별 세부<span class=hint>(누르면 12개 던전 표)</span></summary><div class=nested>
 <b>lt=99 던전 결과 보상 — 하이퍼 던전별 (총 +867.6억)</b>
 <table style="margin-top:6px">
 <tr><th>dungeon_id</th><th>던전명</th><th>유형</th><th class=r>획득 (억)</th><th class=r>로그 건수</th></tr>
@@ -105,15 +117,8 @@ details.inline > .nested details.inline > .nested{background:#070a12}
 <tr><td>911000</td><td>미궁의 아우터리탑</td><td>무한 던전</td><td class=r>5.8</td><td class=r>94</td></tr>
 </table>
 <div class=n style="margin-top:6px">※ 정령탑 4종(909·907·910·908)이 하이퍼 던전 보상의 57%. 무한 던전 미미(12억).</div>
-</div></details></td><td class=r>867.6</td><td class=r>6,427</td></tr>
-<tr><td>266</td><td>길드 탑 일일 보상</td><td class=r>791.2</td><td class=r>283</td></tr>
-<tr><td>255</td><td>배치 보상 (일괄 지급)</td><td class=r>782.4</td><td class=r>1,709</td></tr>
-<tr><td>254</td><td>오프라인 전투 보상</td><td class=r>387.6</td><td class=r>176</td></tr>
-<tr><td>156</td><td>대전 랭킹 보상</td><td class=r>236.0</td><td class=r>391</td></tr>
-<tr><td>85</td><td>퀘스트 완료 보상</td><td class=r>190.6</td><td class=r>5,198</td></tr>
-<tr><td>252</td><td>칭호 일일 보상</td><td class=r>103.5</td><td class=r>335</td></tr>
-<tr><td>251·84·93·160·94·172</td><td>기타 (칭호승급·퀘수락·출석·PvP·패스·가챠)</td><td class=r>~1.5</td><td class=r>19</td></tr>
-</table>
+</div></details>
+</div>
 </div></details></td><td class=r>+3,342.4</td><td class=r>96%</td><td class=n>던전·길드탑·배치·오프라인·랭킹·퀘·칭호</td></tr>
 
 <tr><td>다크 스톤 판매</td><td class=r>+104.5</td><td class=r>3%</td><td class=n>lt=87 매입환금 중 다크 스톤(1100500261) tx 몫 (주문서 환금 12,191억은 ③ 빠칭코 회수로 분리)</td></tr>
@@ -235,7 +240,19 @@ details.inline > .nested details.inline > .nested{background:#070a12}
 <b>시스템 보상 lt별 — 글로벌 (총 +6,852.8억)</b>
 <table style="margin-top:6px">
 <tr><th style="width:6%">lt</th><th>행위</th><th class=r style="width:15%">획득 (억)</th><th class=r style="width:12%">건수</th></tr>
-<tr><td>99</td><td><details class=inline><summary>던전 결과 보상<span class=hint>(누르면 던전별 세부)</span></summary><div class=nested>
+<tr><td>99</td><td>던전 결과 보상 <span class=n>(아래 던전별 세부 별도 확장)</span></td><td class=r>1,898.8</td><td class=r>32,837</td></tr>
+<tr><td>266</td><td>길드 탑 일일 보상</td><td class=r>1,778.3</td><td class=r>832</td></tr>
+<tr><td>85</td><td>퀘스트 완료 보상</td><td class=r>1,236.2</td><td class=r>33,308</td></tr>
+<tr><td>255</td><td>배치 보상 (일괄 지급)</td><td class=r>1,087.2</td><td class=r>8,144</td></tr>
+<tr><td>156</td><td>대전 랭킹 보상</td><td class=r>547.3</td><td class=r>1,491</td></tr>
+<tr><td>254</td><td>오프라인 전투 보상</td><td class=r>339.7</td><td class=r>589</td></tr>
+<tr><td>252</td><td>칭호 일일 보상</td><td class=r>322.9</td><td class=r>1,573</td></tr>
+<tr><td>251</td><td>칭호 승급</td><td class=r>15.4</td><td class=r>136</td></tr>
+<tr><td>160</td><td>PvP 승리 보상</td><td class=r>7.2</td><td class=r>6</td></tr>
+<tr><td>84·93</td><td>기타 (퀘 수락·출석)</td><td class=r>~0.1</td><td class=r>32</td></tr>
+</table>
+<div class=sub-block>
+<details class=inline><summary>└ 던전 결과 보상 (lt=99) 던전별 세부<span class=hint>(누르면 12개 던전 표)</span></summary><div class=nested>
 <b>lt=99 던전 결과 보상 — 글로벌 던전별 (총 +1,898.8억)</b>
 <table style="margin-top:6px">
 <tr><th>dungeon_id</th><th>던전명</th><th>유형</th><th class=r>획득 (억)</th><th class=r>로그 건수</th></tr>
@@ -253,17 +270,8 @@ details.inline > .nested details.inline > .nested{background:#070a12}
 <tr><td>911000</td><td>미궁의 아우터리탑</td><td>무한 던전</td><td class=r>75.9</td><td class=r>1,329</td></tr>
 </table>
 <div class=n style="margin-top:6px">※ 대지 정령탑 1위(16%). 무한 던전(178억) 소비가 하이퍼(12억)의 15배 — 글로벌은 무한 던전 활발.</div>
-</div></details></td><td class=r>1,898.8</td><td class=r>32,837</td></tr>
-<tr><td>266</td><td>길드 탑 일일 보상</td><td class=r>1,778.3</td><td class=r>832</td></tr>
-<tr><td>85</td><td>퀘스트 완료 보상</td><td class=r>1,236.2</td><td class=r>33,308</td></tr>
-<tr><td>255</td><td>배치 보상 (일괄 지급)</td><td class=r>1,087.2</td><td class=r>8,144</td></tr>
-<tr><td>156</td><td>대전 랭킹 보상</td><td class=r>547.3</td><td class=r>1,491</td></tr>
-<tr><td>254</td><td>오프라인 전투 보상</td><td class=r>339.7</td><td class=r>589</td></tr>
-<tr><td>252</td><td>칭호 일일 보상</td><td class=r>322.9</td><td class=r>1,573</td></tr>
-<tr><td>251</td><td>칭호 승급</td><td class=r>15.4</td><td class=r>136</td></tr>
-<tr><td>160</td><td>PvP 승리 보상</td><td class=r>7.2</td><td class=r>6</td></tr>
-<tr><td>84·93</td><td>기타 (퀘 수락·출석)</td><td class=r>~0.1</td><td class=r>32</td></tr>
-</table>
+</div></details>
+</div>
 </div></details></td><td class=r>+6,852.8</td><td class=r>97%</td><td class=n>던전·길드탑·퀘·배치·랭킹·오프라인·칭호</td></tr>
 
 <tr><td>다크 스톤 판매</td><td class=r>+177.9</td><td class=r>3%</td><td class=n>lt=87 매입환금 중 다크 스톤(1100500261) tx 몫 (주문서 환금 5,401억은 ③ 빠칭코 회수로 분리)</td></tr>
